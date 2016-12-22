@@ -61,3 +61,5 @@ nbproject/*
 # *.ipr
 
 # End of https://www.gitignore.io/api/intellij
+
+#src/main/java/net/pieterdev/BigAssMovieParser/References.java

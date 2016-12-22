@@ -2,6 +2,7 @@ package net.pieterdev.BigAssMovieParser.Loaders;
 
 import net.pieterdev.BigAssMovieParser.DataType;
 import net.pieterdev.BigAssMovieParser.Parsers.ParserBase;
+import net.pieterdev.BigAssMovieParser.References;
 
 import java.io.File;
 import java.io.PrintWriter;
@@ -19,8 +20,8 @@ public class MovieLoader extends BaseLoader
     void StreamOpperation(Stream<String> lines)
     {
         ParserBase parser = DataType.MOVIES.getParser();
-        File movieFile = new File("/home/pieter/Documents/Movies.txt");
-        File serieFile = new File("/home/pieter/Documents/Series.txt");
+        File movieFile = new File(References.MOVIES_PATH);
+        File serieFile = new File(References.SERIES_PATH);
         try
         {
             PrintWriter movieWriter = new PrintWriter(movieFile);
