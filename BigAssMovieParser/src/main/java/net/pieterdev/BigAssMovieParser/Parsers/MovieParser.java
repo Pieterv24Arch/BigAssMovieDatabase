@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 public class MovieParser implements ParserBase{
     public String parseString(String line)
     {
-        Pattern moviePattern = Pattern.compile("(.*?)\\(([\\d{4}]*)(?:\\/)?[\\w]*?\\).*");
+        Pattern moviePattern = getPattern();
         Pattern seriePattern = Pattern.compile("(.*?)\\(([\\d{4}]*)(?:\\/)?[\\w]*?\\)\\s*\\{(.*?)(\\(#(\\d*?)\\.(\\d*?)\\))?\\}.*");
 
         if(seriePattern.matcher(line).matches())
@@ -29,5 +29,10 @@ public class MovieParser implements ParserBase{
         }
         else
             return "";
+    }
+
+    public Pattern getPattern()
+    {
+        return Pattern.compile("(.*?)\\(([\\d{4}]*)(?:\\/)?[\\w]*?\\).*");
     }
 }

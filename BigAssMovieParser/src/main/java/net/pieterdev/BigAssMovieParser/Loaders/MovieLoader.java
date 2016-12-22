@@ -5,51 +5,40 @@ import net.pieterdev.BigAssMovieParser.Parsers.ParserBase;
 import net.pieterdev.BigAssMovieParser.References;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
-public class MovieLoader extends BaseLoader
-{
-    public MovieLoader()
-    {
-        super("movieTest.txt");
+public class MovieLoader extends BaseLoader {
+    public MovieLoader() {
+        super("movieTest.txt", DataType.MOVIES);
     }
 
     @Override
-    void StreamOpperation(Stream<String> lines)
-    {
+    void StreamOperations(Stream<String> lines, DataType dataType) throws FileNotFoundException {
         ParserBase parser = DataType.MOVIES.getParser();
         File movieFile = new File(References.MOVIES_PATH);
-        File serieFile = new File(References.SERIES_PATH);
-        try
-        {
-            PrintWriter movieWriter = new PrintWriter(movieFile);
-            PrintWriter serieWriter = new PrintWriter(serieFile);
+        File seriesFile = new File(References.SERIES_PATH);
 
-            Pattern pattern = Pattern.compile("(.*?)\\(([\\d{4}]*)(?:\\/)?[\\w]*?\\).*");
-            lines
-                    .filter(s -> pattern.matcher(s).matches())
-                    .map(s -> parser.parseString(s))
-                    .filter(s -> !s.isEmpty())
-                    .forEach(s -> WriteTofile(movieWriter, serieWriter, s));
-            movieWriter.close();
-            serieWriter.close();
-        }
-        catch (Exception ex)
-        {
-            System.out.println("PrintWriter: " + ex);
-        }
+        PrintWriter movieWriter = new PrintWriter(movieFile);
+        PrintWriter seriesWriter = new PrintWriter(seriesFile);
+
+        Pattern pattern = Pattern.compile("(.*?)\\(([\\d{4}]*)(?:\\/)?[\\w]*?\\).*");
+        assert parser != null;
+        lines
+                .filter(s -> pattern.matcher(s).matches())
+                .map(parser::parseString)
+                .filter(s -> !s.isEmpty())
+                .forEach(s -> WriteTofile(movieWriter, seriesWriter, s));
+        movieWriter.close();
+        seriesWriter.close();
     }
 
-    void WriteTofile(PrintWriter movieWriter, PrintWriter serieWriter, String line)
-    {
-        if(line.contains("\""))
-        {
+    private void WriteTofile(PrintWriter movieWriter, PrintWriter serieWriter, String line) {
+        if (line.contains("\"")) {
             serieWriter.println(line.replace("\"", ""));
-        }
-        else
-        {
+        } else {
             movieWriter.println(line);
         }
     }
