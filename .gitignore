@@ -13,9 +13,9 @@ hs_err_pid*
 
 *.list
 *.list.gz
-/nbproject/private/
-/BigAssMovieParser/nbproject/private/
-/BigAssMovieParser/build/
+*/nbproject/private/
+*/BigAssMovieParser/nbproject/private/
+*/BigAssMovieParser/build/
 
 
 # Created by https://www.gitignore.io/api/intellij
@@ -27,7 +27,7 @@ hs_err_pid*
 # User-specific stuff:
 .idea/workspace.xml
 .idea/tasks.xml
-.idea/*
+*/.idea/*
 
 # Sensitive or high-churn files:
 .idea/dataSources/
@@ -51,7 +51,7 @@ hs_err_pid*
 ## Plugin-specific files:
 
 # IntelliJ
-/out/
+*/out/
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
@@ -68,8 +68,8 @@ fabric.properties
 #Netbeans
 build.xml
 manifest.mf
-build/*
-nbproject/*
+*/build/*
+*/nbproject/*
 
 ### Intellij Patch ###
 # Comment Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-215987721
@@ -81,4 +81,4 @@ nbproject/*
 
 # End of https://www.gitignore.io/api/intellij
 
-src/main/java/net/pieterdev/BigAssMovieParser/References.java
+*/src/main/java/net/pieterdev/BigAssMovieParser/References.java
