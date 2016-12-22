@@ -46,6 +46,12 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
+#Netbeans
+build.xml
+manifest.mf
+build/*
+nbproject/*
+
 ### Intellij Patch ###
 # Comment Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-215987721
 

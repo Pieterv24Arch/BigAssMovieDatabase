@@ -13,3 +13,6 @@ hs_err_pid*
 
 *.list
 *.list.gz
+/nbproject/private/
+/BigAssMovieParser/nbproject/private/
+/BigAssMovieParser/build/
