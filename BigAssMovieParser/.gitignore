@@ -62,4 +62,4 @@ nbproject/*
 
 # End of https://www.gitignore.io/api/intellij
 
-#src/main/java/net/pieterdev/BigAssMovieParser/References.java
+src/main/java/net/pieterdev/BigAssMovieParser/References.java
