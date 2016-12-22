@@ -21,20 +21,19 @@ public class MovieLoader extends BaseLoader
         ParserBase parser = DataType.MOVIES.getParser();
         File movieFile = new File("/home/pieter/Documents/Movies.txt");
         File serieFile = new File("/home/pieter/Documents/Series.txt");
-        try(PrintWriter movieWriter = new PrintWriter(movieFile))
+        try
         {
-            try(PrintWriter serieWriter = new PrintWriter(serieFile)) {
+            PrintWriter movieWriter = new PrintWriter(movieFile);
+            PrintWriter serieWriter = new PrintWriter(serieFile);
 
-
-                Pattern pattern = Pattern.compile("(.*?)\\(([\\d{4}]*)(?:\\/)?[\\w]*?\\).*");
-                lines
-                        .filter(s -> pattern.matcher(s).matches())
-                        .map(s -> parser.parseString(s))
-                        .filter(s -> !s.isEmpty())
-                        .forEach(s -> WriteTofile(movieWriter, serieWriter, s));
-                movieWriter.close();
-                serieWriter.close();
-            }
+            Pattern pattern = Pattern.compile("(.*?)\\(([\\d{4}]*)(?:\\/)?[\\w]*?\\).*");
+            lines
+                    .filter(s -> pattern.matcher(s).matches())
+                    .map(s -> parser.parseString(s))
+                    .filter(s -> !s.isEmpty())
+                    .forEach(s -> WriteTofile(movieWriter, serieWriter, s));
+            movieWriter.close();
+            serieWriter.close();
         }
         catch (Exception ex)
         {
