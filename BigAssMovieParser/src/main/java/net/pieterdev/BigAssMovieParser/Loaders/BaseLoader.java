@@ -20,6 +20,7 @@ public abstract class BaseLoader {
         try(Stream<String> lines = Files.lines(getPath(sourceFile)))
         {
             StreamOperations(lines, dataType);
+            lines.close();
         }
         catch (Exception ex)
         {

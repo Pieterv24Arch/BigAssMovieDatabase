@@ -17,7 +17,7 @@ public class MovieLoader extends BaseLoader {
 
     @Override
     void StreamOperations(Stream<String> lines, DataType dataType) throws FileNotFoundException {
-        ParserBase parser = DataType.MOVIES.getParser();
+        ParserBase parser = dataType.getParser();
         File movieFile = new File(References.MOVIES_PATH);
         File seriesFile = new File(References.SERIES_PATH);
 
