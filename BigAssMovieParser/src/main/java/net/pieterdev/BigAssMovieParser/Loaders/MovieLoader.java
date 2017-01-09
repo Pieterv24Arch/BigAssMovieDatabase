@@ -11,8 +11,8 @@ import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 public class MovieLoader extends BaseLoader {
-    public MovieLoader() {
-        super("movieTest.txt", DataType.MOVIES);
+    public MovieLoader(String sourceFile) {
+        super(sourceFile, DataType.MOVIES);
     }
 
     @Override
