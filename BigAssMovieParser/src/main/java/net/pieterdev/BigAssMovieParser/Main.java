@@ -1,7 +1,9 @@
 package net.pieterdev.BigAssMovieParser;
 
 import net.pieterdev.BigAssMovieParser.Loaders.BaseLoader;
+import net.pieterdev.BigAssMovieParser.Loaders.MPAALoader;
 import net.pieterdev.BigAssMovieParser.Loaders.MovieLoader;
+import net.pieterdev.BigAssMovieParser.Loaders.WriterLoader;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,6 +16,7 @@ public class Main {
         System.out.println("What kind of file do you want to convert");
         System.out.println("(0) Movies and Series");
         System.out.println("(1) Actors");
+        System.out.println("(2) MPAA");
         String typeInput = br.readLine();
 
         DataType type = GetDataType(typeInput);
@@ -36,6 +39,7 @@ public class Main {
         switch (type) {
             case "0": return DataType.MOVIES;
             case "1": return DataType.ACTORS;
+            case "2": return DataType.MPAA;
         }
         return null;
     }

@@ -21,6 +21,7 @@ public class BaseLoader {
         try(Stream<String> lines = Files.lines(getPath(sourceFile), StandardCharsets.ISO_8859_1))
         {
             StreamOperations(lines, dataType);
+            lines.close();
         }
         catch (Exception ex)
         {
