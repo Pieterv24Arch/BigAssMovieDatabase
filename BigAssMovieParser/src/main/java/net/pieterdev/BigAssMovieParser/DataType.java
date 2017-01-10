@@ -8,7 +8,7 @@ import net.pieterdev.BigAssMovieParser.Parsers.WriterParser;
 
 public enum DataType {
     MOVIES,
-    ACTORS;
+    ACTORS,
     WRITERS,
     MPAA;
 
