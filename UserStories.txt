@@ -1,0 +1,5 @@
+Als gebruiker wil ik een targetfile en een destinationfile kunnen ingeven zodat ik het programma dynamisch kan gebruiken.
+
+Als gebruiker wil ik dat de gegevens van imdb omgezet worden in een csv bestand zodat ik deze makkelijk in een database kan inlezen.
+
+
