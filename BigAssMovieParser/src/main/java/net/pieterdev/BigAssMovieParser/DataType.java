@@ -10,14 +10,8 @@ import net.pieterdev.BigAssMovieParser.Parsers.WriterParser;
 
 public enum DataType {
     MOVIES,
-<<<<<<< HEAD
     GERNES,
-    RUNTIMES;
-
-    MovieParser movieParser = new MovieParser();
-    GenreParser genreParser = new GenreParser();
-    RuntimeParser runtimeParser = new RuntimeParser();
-=======
+    RUNTIMES,
     ACTORS,
     WRITERS,
     MPAA;
@@ -26,8 +20,9 @@ public enum DataType {
     WriterParser writerParser = new WriterParser();
     MPAAParser mpaaParser = new MPAAParser();
     ActorParser actorParser = new ActorParser();
+    GenreParser genreParser = new GenreParser();
+    RuntimeParser runtimeParser = new RuntimeParser();
 
->>>>>>> master
     public ParserBase getParser()
     {
         switch (this)
@@ -36,17 +31,14 @@ public enum DataType {
                 return actorParser;
             case MOVIES:
                 return movieParser;
-<<<<<<< HEAD
             case GERNES:
                 return genreParser;
             case RUNTIMES:
                 return runtimeParser;
-=======
             case WRITERS:
                 return writerParser;
             case MPAA:
                 return mpaaParser;
->>>>>>> master
             default:
                 return null;
         }
