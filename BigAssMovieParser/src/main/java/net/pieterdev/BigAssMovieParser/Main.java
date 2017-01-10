@@ -17,6 +17,8 @@ public class Main {
         System.out.println("(0) Movies and Series");
         System.out.println("(1) Actors");
         System.out.println("(2) MPAA");
+        System.out.println("(3) Countries");
+        System.out.println("(4) Ratings");
         String typeInput = br.readLine();
 
         DataType type = GetDataType(typeInput);
@@ -40,6 +42,8 @@ public class Main {
             case "0": return DataType.MOVIES;
             case "1": return DataType.ACTORS;
             case "2": return DataType.MPAA;
+            case "3": return DataType.COUNTRIES;
+            case "4": return DataType.RATINGS;
         }
         return null;
     }

@@ -1,0 +1,41 @@
+package net.pieterdev.BigAssMovieParser.Parsers;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class RatingParser implements ParserBase
+{
+    //Pattern Regex Ratings:  .*(\d{1,2}\.\d)\s*(.+)\((\d{4})
+    //Group 1: Rating; Group 2: Title; Group 3: Year;
+    
+    Pattern ratingPattern = Pattern.compile(".*(\\d{1,2}\\.\\d)\\s*(.+)\\((\\d{4})");
+    String rating = "";
+    String movieTitle = "";
+    String movieYear = "";
+
+    public String parseString(String line)
+    {
+        if(ratingPattern.matcher(line).matches())
+        {
+            /**
+             * Group 1: Rating
+             * Group 2: MovieTitle
+             * Group 2: MovieYear
+             */
+            Matcher m = ratingPattern.matcher(line);
+            if(m.find())
+            {
+                rating = m.group(1);
+                movieTitle = m.group(2);
+                movieYear = m.group(3);
+                return String.format("%s%s%s", m.group(1), m.group(2), m.group(3));
+            }
+        }
+        return "";
+    }
+
+    public Pattern getPattern()
+    {
+        return null;
+    }
+}
