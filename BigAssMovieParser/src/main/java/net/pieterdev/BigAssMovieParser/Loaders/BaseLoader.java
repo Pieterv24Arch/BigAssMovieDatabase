@@ -16,23 +16,23 @@ import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 public class BaseLoader {
-    public BaseLoader(String sourceFile, DataType dataType)
+    public BaseLoader(String sourceFile, String targetFile, DataType dataType)
     {
-        try(Stream<String> lines = Files.lines(getPath(sourceFile), StandardCharsets.ISO_8859_1))
+        try(Stream<String> lines = Files.lines(new File(sourceFile).toPath(), StandardCharsets.ISO_8859_1))
         {
-            StreamOperations(lines, dataType);
+            StreamOperations(lines, dataType, targetFile);
             lines.close();
         }
         catch (Exception ex)
         {
-            System.out.println("Stream: " + ex);
+            ex.printStackTrace();
         }
     }
 
-    void StreamOperations(Stream<String> lines, DataType dataType) throws FileNotFoundException {
+    public void StreamOperations(Stream<String> lines, DataType dataType, String targetLocation) throws FileNotFoundException {
         ParserBase parser = dataType.getParser();
 
-        File targetFile = new File(References.MOVIES_PATH);
+        File targetFile = new File(targetLocation);
         PrintWriter writer = new PrintWriter(targetFile);
 
         assert parser != null;
@@ -43,10 +43,5 @@ public class BaseLoader {
                 .filter(s -> !s.isEmpty())
                 .forEach(writer::println);
         writer.close();
-    }
-
-    private Path getPath(String pathString) throws URISyntaxException
-    {
-        return Paths.get(ClassLoader.getSystemResource(pathString).toURI());
     }
 }

@@ -1,11 +1,10 @@
 package net.pieterdev.BigAssMovieParser;
 
 import net.pieterdev.BigAssMovieParser.Loaders.BaseLoader;
-import net.pieterdev.BigAssMovieParser.Loaders.MPAALoader;
 import net.pieterdev.BigAssMovieParser.Loaders.MovieLoader;
-import net.pieterdev.BigAssMovieParser.Loaders.WriterLoader;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
@@ -25,10 +24,18 @@ public class Main {
             System.out.println("Where is the file located?");
             String fileLocation = br.readLine();
 
+            if(!new File(fileLocation).exists())
+                return;
+
+            System.out.println("Where should the output be saved?");
+            String targetLocation = br.readLine();
+
+            System.out.println("Busy...");
+
             if(type.equals(DataType.MOVIES))
-                new MovieLoader(fileLocation);
+                new MovieLoader(fileLocation, targetLocation);
             else
-                new BaseLoader(fileLocation, type);
+                new BaseLoader(fileLocation, targetLocation, type);
         }
         else
             System.out.println("Incorrect Input, Exiting!");

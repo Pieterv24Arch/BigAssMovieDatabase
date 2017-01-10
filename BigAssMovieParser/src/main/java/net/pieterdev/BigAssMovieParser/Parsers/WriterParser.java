@@ -9,7 +9,6 @@ import java.util.regex.Matcher;
  */
 public class WriterParser implements ParserBase
 {
-
     Pattern namePattern = Pattern.compile("(.*?),(.*?)\\t+(.*?)\\((\\d{4})(?:\\/)?[\\w]*?\\)(\\s*\\{(.*?)(\\(#(\\d*?)\\.(\\d*?)\\))\\})?.*");
     Pattern creationPattern = Pattern.compile("\\t{3}(.*?)\\((\\d{4})(?:\\/)?\\w*?\\)(\\s*?\\{(.*?)\\(#(\\d*?).(\\d*?)\\)\\})?.*");
     String[] writer = new String[2];
