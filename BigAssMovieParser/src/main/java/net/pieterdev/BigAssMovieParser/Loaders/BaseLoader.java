@@ -8,18 +8,20 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
-public abstract class BaseLoader {
+public class BaseLoader {
     public BaseLoader(String sourceFile, DataType dataType)
     {
-        try(Stream<String> lines = Files.lines(getPath(sourceFile)))
+        try(Stream<String> lines = Files.lines(getPath(sourceFile), StandardCharsets.ISO_8859_1))
         {
             StreamOperations(lines, dataType);
+            lines.close();
         }
         catch (Exception ex)
         {

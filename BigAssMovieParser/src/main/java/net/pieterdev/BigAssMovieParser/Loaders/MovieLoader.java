@@ -11,13 +11,13 @@ import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 public class MovieLoader extends BaseLoader {
-    public MovieLoader() {
-        super("movieTest.txt", DataType.MOVIES);
+    public MovieLoader(String sourceFile) {
+        super(sourceFile, DataType.MOVIES);
     }
 
     @Override
     void StreamOperations(Stream<String> lines, DataType dataType) throws FileNotFoundException {
-        ParserBase parser = DataType.MOVIES.getParser();
+        ParserBase parser = dataType.getParser();
         File movieFile = new File(References.MOVIES_PATH);
         File seriesFile = new File(References.SERIES_PATH);
 
