@@ -31,8 +31,14 @@ public class GenreParser implements ParserBase{
              */
             if(line.startsWith("\""))
             {
+                /**
+                 * return if line contains a serie
+                 */
                 return String.format("%s~%s~%s~%s~%s~%s", m.group(1).trim(), m.group(2), m.group(3).trim(), m.group(4), m.group(5), m.group(6));
-            } else return String.format("%s~%s~%s", m.group(1).trim(), m.group(2), m.group(6));
+            }   /**
+                * return if line contains a movie
+                */
+            else return String.format("%s~%s~%s", m.group(1).trim(), m.group(2), m.group(6));
         }
        
         return "";
