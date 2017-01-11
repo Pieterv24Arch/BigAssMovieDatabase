@@ -3,7 +3,17 @@ package net.pieterdev.BigAssMovieParser.Parsers;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Parser for the movies list
+ * @author Pieter
+ */
 public class MovieParser implements ParserBase{
+    /**
+     * Parser logic is used on given line.
+     * If line does not conform with patterns an empty string is returned.
+     * @param line line to be parsed
+     * @return parsed string or and empty string
+     */
     public String parseString(String line)
     {
         Pattern moviePattern = getPattern();
@@ -11,6 +21,13 @@ public class MovieParser implements ParserBase{
 
         if(seriePattern.matcher(line).matches())
         {
+            /**
+             * Group 1: Movie/Serie Name.
+             * Group 2: Movie/Serie Year.
+             * Group 3: Episode name(null if not episode)
+             * Group 5: Season nr(null if not found)
+             * Group 6: Episode nr(null if not found)
+             */
             Matcher m = seriePattern.matcher(line);
             if(m.find())
             {
@@ -20,6 +37,10 @@ public class MovieParser implements ParserBase{
         }
         else if(moviePattern.matcher(line).matches())
         {
+            /**
+             * Group 1: Movie/Serie Name.
+             * Group 2: Movie/Serie Year.
+             */
             Matcher m = moviePattern.matcher(line);
             if(m.find())
             {
