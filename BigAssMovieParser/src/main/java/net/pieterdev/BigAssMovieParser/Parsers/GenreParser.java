@@ -12,8 +12,9 @@ public class GenreParser implements ParserBase{
         System.out.println(line);
         if(m.find())
         {
+            
             if(line.startsWith("\""))
-            {System.out.println(m.group(4));
+            {
                 return String.format("%s~%s~%s~%s~%s~%s", m.group(1).trim(), m.group(2), m.group(3).trim(), m.group(4), m.group(5), m.group(6));
             } else return String.format("%s~%s~%s", m.group(1).trim(), m.group(2), m.group(6));
         }
