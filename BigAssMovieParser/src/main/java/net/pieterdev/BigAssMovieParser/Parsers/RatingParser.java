@@ -4,41 +4,62 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class RatingParser implements ParserBase
-{
-    //Pattern Regex Ratings:  .*(\d{1,2}\.\d)\s*(.+)\((\d{4})
-    //Group 1: Rating; Group 2: Title; Group 3: Year;
-    
-    Pattern ratingPattern = Pattern.compile(".*(\\d{1,2}\\.\\d)\\s*(.+)\\((\\d{4})");
-
+{   
     public String parseString(String line)
     {
-        if(ratingPattern.matcher(line).matches())
+        Pattern movieRatingPattern = getPattern();
+        Pattern serieRatingPattern = Pattern.compile(".*(\\d{1,2}\\.\\d)\\s*(.+)\\((\\d{4})\\)\\s*(?:\\{(.*?)(?:\\(#(\\d*?)\\.(\\d*?)\\))?\\}|)");
+
+        
+        if(serieRatingPattern.matcher(line).matches())
         {
             /**
+             * Pattern Regex Ratings series:  .*(\d{1,2}\.\d)\s*(.+)\((\d{4})\)\s*(?:\{(.*?)(?:\(#(\d*?)\.(\d*?)\))?\}|)
              * Group 1: Rating
-             * Group 2: MovieTitle
-             * Group 2: MovieYear
+             * Group 2: Serie Title
+             * Group 3: Year
+             * Group 4: Episode Title; 
+             * Group 5: Season Number; 
+             * Group 6: Episode Number;
              */
-            Matcher m = ratingPattern.matcher(line);
+            Matcher m = serieRatingPattern.matcher(line);
             if(m.find())
             {
-                String rating;
-                rating = m.group(1);
+                String Rating = m.group(1);
+                String SerieTitle = m.group(2);
+                String Year = m.group(3);
+                String EpTitle = m.group(4);
+                String SeasonNr = m.group(5);
+                String EpNr = m.group(6);
                 
-                String movieTitle;
-                movieTitle = m.group(2);
-                
-                String movieYear;
-                movieYear = m.group(3);
-                
-                return String.format("%s%s%s", m.group(1), m.group(2), m.group(3));
+                return String.format("%s%s%s", Rating, SerieTitle.trim(), Year, EpTitle.trim(), SeasonNr, EpNr);
             }
+            return "";
+        }
+        else if (movieRatingPattern.matcher(line).matches())
+        {
+            /**
+             * Pattern Regex Ratings movies:  .*(\d{1,2}\.\d)\s*(.+)\((\d{4})
+             * Group 1: Rating
+             * Group 2: Title
+             * Group 3: Year
+             */
+            Matcher m = movieRatingPattern.matcher(line);
+            if(m.find())
+            {
+                String Rating = m.group(1);
+                String MovieTitle = m.group(2);
+                String Year = m.group(3);
+                
+                return String.format("%s~%s~%s", Rating, MovieTitle.trim(), Year);
+            }
+            return "";  
         }
         return "";
     }
 
     public Pattern getPattern()
     {
-        return null;
+        return Pattern.compile(".*(\\d{1,2}\\.\\d)\\s*(.+)\\((\\d{4})");
     }
 }

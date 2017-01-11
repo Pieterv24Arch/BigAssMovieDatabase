@@ -12,25 +12,35 @@ import net.pieterdev.BigAssMovieParser.References;
 
 public class CountryLoader extends BaseLoader
 {
-    public CountryLoader()
+    public CountryLoader(String sourceFile, String targetFile)
     {
-        super("countries.txt", DataType.COUNTRIES);
+        super(sourceFile, targetFile, DataType.COUNTRIES);
     }
 
-    @Override
-    void StreamOperations(Stream<String> lines, DataType dataType) throws FileNotFoundException
+    public void StreamOperations(Stream<String> lines, DataType dataType, String targetLocation) throws FileNotFoundException
     {
-        
         ParserBase parser = dataType.getParser();
-        File countryFile = new File(References.COUNTRIES_PATH);
-  
-        PrintWriter countryWriter = new PrintWriter(countryFile);
+        File MovieCountriesFile = new File(targetLocation + "MovieCountries.txt");
+        File SerieCountriesFile = new File(targetLocation + "SerieCountries.txt");
 
+        PrintWriter MovieCountriesWriter = new PrintWriter(MovieCountriesFile);
+        PrintWriter SerieCountriesWriter = new PrintWriter(SerieCountriesFile);
+
+        assert parser != null;
+        
         lines
-                .filter(s -> !s.isEmpty())
                 .map(parser::parseString)
                 .filter(s -> !s.isEmpty())
-                .forEach(countryWriter::println);
-        countryWriter.close();
+                .forEach(s -> WriteTofile(MovieCountriesWriter, SerieCountriesWriter, s));
+        MovieCountriesWriter.close();
+        SerieCountriesWriter.close();
+    }
+    
+    private void WriteTofile(PrintWriter MovieCountriesWriter, PrintWriter SerieCountriesWriter, String line) {
+        if (line.contains("\"")) {
+            SerieCountriesWriter.println(line.replace("\"", ""));
+        } else {
+            MovieCountriesWriter.println(line);
+        }
     }
 }

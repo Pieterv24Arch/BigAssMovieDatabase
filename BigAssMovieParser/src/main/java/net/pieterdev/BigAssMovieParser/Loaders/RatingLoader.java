@@ -11,24 +11,35 @@ import net.pieterdev.BigAssMovieParser.References;
 
 public class RatingLoader extends BaseLoader
 {
-    public RatingLoader()
+    public RatingLoader(String sourceFile, String targetFile)
     {
-        super("ratings.txt", DataType.RATINGS);
+        super(sourceFile, targetFile, DataType.RATINGS);
     }
 
     @Override
-    void StreamOperations(Stream<String> lines, DataType dataType) throws FileNotFoundException
+    public void StreamOperations(Stream<String> lines, DataType dataType, String targetLocation) throws FileNotFoundException
     {
         ParserBase parser = dataType.getParser();
-        File ratingFile = new File(References.RATINGS_PATH);
-        
-        PrintWriter ratingWriter = new PrintWriter(ratingFile);
+        File movieRatingFile = new File(targetLocation + "movieRating.txt");
+        File serieRatingFile = new File(targetLocation + "serieRating.txt");
 
+        PrintWriter movieRatingWriter = new PrintWriter(movieRatingFile);
+        PrintWriter serieRatingWriter = new PrintWriter(serieRatingFile);
+        
+        assert parser != null;
         lines
-                .filter(s -> !s.isEmpty())
                 .map(parser::parseString)
                 .filter(s -> !s.isEmpty())
-                .forEach(ratingWriter::println);
-        ratingWriter.close();
+                .forEach(s -> WriteTofile(movieRatingWriter, serieRatingWriter, s));
+        movieRatingWriter.close();
+        serieRatingWriter.close();
+    }
+    
+    private void WriteTofile(PrintWriter movieRatingWriter, PrintWriter serieRatingWriter, String line) {
+        if (line.contains("\"")) {
+            serieRatingWriter.println(line.replace("\"", ""));
+        } else {
+            movieRatingWriter.println(line);
+        }
     }
 }
