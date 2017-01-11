@@ -9,9 +9,6 @@ public class RatingParser implements ParserBase
     //Group 1: Rating; Group 2: Title; Group 3: Year;
     
     Pattern ratingPattern = Pattern.compile(".*(\\d{1,2}\\.\\d)\\s*(.+)\\((\\d{4})");
-    String rating = "";
-    String movieTitle = "";
-    String movieYear = "";
 
     public String parseString(String line)
     {
@@ -25,9 +22,15 @@ public class RatingParser implements ParserBase
             Matcher m = ratingPattern.matcher(line);
             if(m.find())
             {
+                String rating;
                 rating = m.group(1);
+                
+                String movieTitle;
                 movieTitle = m.group(2);
+                
+                String movieYear;
                 movieYear = m.group(3);
+                
                 return String.format("%s%s%s", m.group(1), m.group(2), m.group(3));
             }
         }

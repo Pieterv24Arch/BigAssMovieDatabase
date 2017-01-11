@@ -14,9 +14,7 @@ public class CountryParser implements ParserBase
     Group 5: Country;
     */
     Pattern countryPattern = Pattern.compile("(.*(\\d{4}(\\/\\w*)?|\\?{4})\\))\\s*(\\{.*\\})?\\s*(\\w+)");
-    String movieTitle = "";
-    String country = "";
-
+    
     public String parseString(String line)
     {
         if(countryPattern.matcher(line).matches())
@@ -28,8 +26,12 @@ public class CountryParser implements ParserBase
             Matcher m = countryPattern.matcher(line);
             if(m.find())
             {
+                String movieTitle;
                 movieTitle = m.group(1);
+                
+                String country;
                 country = m.group(5);
+                
                 return String.format("%s%s", m.group(1), m.group(5));
             }
         }
