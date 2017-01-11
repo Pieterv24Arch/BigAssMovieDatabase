@@ -46,6 +46,6 @@ public class GenreParser implements ParserBase{
 
     public Pattern getPattern()
     {
-        return Pattern.compile("(.*)\\(([\\d{4}]*)\\)\\s+(?:\\(.+\\)|\\{(.*?)(?:\\(#(\\d*?)\\.(\\d*?)\\))?\\}|)\\s+(.+)");
+        return Pattern.compile("(.*)\\(([\\d{4}]*)(?:\\/\\w+)?\\)\\s*(?:\\(.+\\)\\s+)?(?:\\{(.*?)(?:\\(#(\\d+)\\.(\\d+)\\))?\\}\\s+)?(?:.*:)?(\\w+(?:-\\w+)?).*");
     }
 }

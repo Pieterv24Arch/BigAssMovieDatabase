@@ -45,6 +45,6 @@ public class RuntimeParser implements ParserBase{
 
     public Pattern getPattern()
     {
-        return Pattern.compile("(.*)\\(([\\d{4}]*)\\)\\s+(?:\\(.+\\)|\\{(.*?)(?:\\(#(\\d*?)\\.(\\d*?)\\))?\\}|)\\s+(?:\\w+\\:|)(\\d+)");
+        return Pattern.compile("(.*)\\(([\\d{4}]*)(?:\\/\\w+)?\\)\\s*(?:\\(.+\\)\\s+)?(?:\\{(.*?)(?:\\(#(\\d+)\\.(\\d+)\\))?\\}\\s+)?(?:.*:)?(\\d+).*");
     }
 }
