@@ -3,6 +3,10 @@ package net.pieterdev.BigAssMovieParser.Parsers;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Parser for the MPAA Ratings
+ * @author Pieter
+ */
 public class MPAAParser implements ParserBase
 {
     Pattern moviePattern = Pattern.compile("MV: (.*?)(?: \\()(\\d{4})(?:\\/)?[\\w]*?\\).*");
@@ -11,6 +15,14 @@ public class MPAAParser implements ParserBase
     String movieName = "";
     String movieYear = "";
 
+    /**
+     * movieName and movieYear are a buffer.
+     * The buffer is emptied everytime a sequence of --- is found.
+     * If movie name/year is found buffer is filled.
+     * If rating is found it will be appended with the buffer and returned.
+     * @param line line to parse
+     * @return parsed string if complete dataset is found otherwise and empty string will be returned.
+     */
     public String parseString(String line)
     {
         if(splitPattern.matcher(line).matches())
@@ -49,6 +61,6 @@ public class MPAAParser implements ParserBase
 
     public Pattern getPattern()
     {
-        return null;
+        return Pattern.compile(".*");
     }
 }
