@@ -39,6 +39,8 @@ public class BaseLoader {
         }
     }
 
+    public BaseLoader() {
+    }
 
     /**
      * Stream to pass lines to the parser and to the output file.
