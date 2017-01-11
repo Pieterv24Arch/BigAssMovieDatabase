@@ -10,6 +10,10 @@ import net.pieterdev.BigAssMovieParser.Parsers.ParserBase;
 import net.pieterdev.BigAssMovieParser.Parsers.RatingParser;
 import net.pieterdev.BigAssMovieParser.Parsers.WriterParser;
 
+/**
+ * Factory for the parser types.
+ * @author Pieter
+ */
 public enum DataType {
     MOVIES,
     GERNES,
@@ -29,6 +33,10 @@ public enum DataType {
     GenreParser genreParser = new GenreParser();
     RuntimeParser runtimeParser = new RuntimeParser();
 
+    /**
+     * returns preinstantiated of the parser for this type
+     * @return
+     */
     public ParserBase getParser()
     {
         switch (this)

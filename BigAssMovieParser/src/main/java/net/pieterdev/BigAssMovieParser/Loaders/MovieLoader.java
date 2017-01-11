@@ -11,10 +11,13 @@ import java.nio.file.Files;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
+/**
+ * Loader for the movie list.
+ * @author Pieter
+ */
 public class MovieLoader extends BaseLoader {
 
     public MovieLoader(String sourceFile, String targetFile) {
-
         try(Stream<String> lines = Files.lines(new File(sourceFile).toPath(), StandardCharsets.ISO_8859_1)){
             StreamOperations(lines, targetFile);
             lines.close();
@@ -44,6 +47,12 @@ public class MovieLoader extends BaseLoader {
         seriesWriter.close();
     }
 
+    /**
+     * Splits of series from movies into 2 seperate files.
+     * @param movieWriter writer for the movies file
+     * @param serieWriter writer for the series file
+     * @param line parsed line to be written
+     */
     private void WriteTofile(PrintWriter movieWriter, PrintWriter serieWriter, String line) {
         if (line.contains("\"")) {
             serieWriter.println(line.replace("\"", ""));

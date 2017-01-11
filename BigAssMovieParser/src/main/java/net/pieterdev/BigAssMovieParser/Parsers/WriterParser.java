@@ -84,6 +84,6 @@ public class WriterParser implements ParserBase
 
     public Pattern getPattern()
     {
-        return null;
+        return Pattern.compile(".*");
     }
 }
