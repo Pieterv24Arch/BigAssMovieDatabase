@@ -2,24 +2,33 @@ package net.pieterdev.BigAssMovieParser.Loaders;
 
 import net.pieterdev.BigAssMovieParser.DataType;
 import net.pieterdev.BigAssMovieParser.Parsers.ParserBase;
-import net.pieterdev.BigAssMovieParser.References;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 public class MovieLoader extends BaseLoader {
 
     public MovieLoader(String sourceFile, String targetFile) {
-        super(sourceFile, targetFile, DataType.MOVIES);
+
+        try(Stream<String> lines = Files.lines(new File(sourceFile).toPath(), StandardCharsets.ISO_8859_1)){
+            StreamOperations(lines, targetFile);
+            lines.close();
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
 
-    void StreamOperations(Stream<String> lines, DataType dataType) throws FileNotFoundException {
-        ParserBase parser = dataType.getParser();
-        File movieFile = new File(References.MOVIES_PATH);
-        File seriesFile = new File(References.SERIES_PATH);
+    public void StreamOperations(Stream<String> lines, String targetLocation) throws FileNotFoundException {
+        ParserBase parser = DataType.MOVIES.getParser();
+        File movieFile = new File(targetLocation + "/moviesexport.csv");
+        File seriesFile = new File(targetLocation + "/seriesexport.csv");
 
         PrintWriter movieWriter = new PrintWriter(movieFile);
         PrintWriter seriesWriter = new PrintWriter(seriesFile);

@@ -2,16 +2,12 @@ package net.pieterdev.BigAssMovieParser.Loaders;
 
 import net.pieterdev.BigAssMovieParser.DataType;
 import net.pieterdev.BigAssMovieParser.Parsers.ParserBase;
-import net.pieterdev.BigAssMovieParser.References;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
@@ -27,6 +23,9 @@ public class BaseLoader {
         {
             ex.printStackTrace();
         }
+    }
+
+    public BaseLoader() {
     }
 
     public void StreamOperations(Stream<String> lines, DataType dataType, String targetLocation) throws FileNotFoundException {
