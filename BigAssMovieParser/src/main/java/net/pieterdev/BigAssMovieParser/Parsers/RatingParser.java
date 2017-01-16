@@ -42,7 +42,7 @@ public class RatingParser implements ParserBase
                 String SeasonNr = m.group(5);
                 String EpNr = m.group(6);
                 
-                return String.format("%s%s%s", Rating, SerieTitle.trim(), Year, EpTitle.trim(), SeasonNr, EpNr);
+                return String.format("%s%s%s~true", SerieTitle.trim(), Year, Rating);
             }
             return "";
         }
@@ -61,7 +61,7 @@ public class RatingParser implements ParserBase
                 String MovieTitle = m.group(2);
                 String Year = m.group(3);
                 
-                return String.format("%s~%s~%s", Rating, MovieTitle.trim(), Year);
+                return String.format("%s~%s~%s~false", MovieTitle.trim(), Year, Rating);
             }
             return "";  
         }

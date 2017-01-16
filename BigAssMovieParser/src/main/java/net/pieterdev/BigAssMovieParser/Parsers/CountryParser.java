@@ -41,7 +41,7 @@ public class CountryParser implements ParserBase
                 String EpNr = m.group(5);
                 String Country = m.group(6);
                 
-                return String.format("%s~%s~%s~%s~%s~%s", SerieTitle.trim(), Year, EpTitle.trim(), SeasonNr, EpNr, Country.trim());
+                return String.format("%s~%s~%s~%s~%s~%s~true", SerieTitle.trim(), Year, Country.trim());
             }
             return "";
         }
@@ -59,7 +59,7 @@ public class CountryParser implements ParserBase
                 String Title = m.group(1);
                 String Year = m.group(2);
                 String Country = m.group(3);
-                return String.format("%s~%s~%s", Title.trim(), Year, Country.trim());
+                return String.format("%s~%s~%s~false", Title.trim(), Year, Country.trim());
             }
             return "";
         }
