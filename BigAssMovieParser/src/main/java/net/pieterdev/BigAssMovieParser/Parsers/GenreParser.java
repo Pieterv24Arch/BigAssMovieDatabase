@@ -29,17 +29,18 @@ public class GenreParser implements ParserBase{
              * Group 5: Episode number, null if not found
              * Group 6: Genre
              */
-            if(line.startsWith("\""))
+             if(line.startsWith("\""))
             {
                 /**
                  * return if line contains a serie
                  */
-                return String.format("%s~%s~%s~%s~%s~%s", m.group(1).trim(), m.group(2), m.group(3).trim(), m.group(4), m.group(5), m.group(6));
+                String serieName = m.group(1).replace("\"", "").trim();
+                return String.format("%s~%s~%s~true", serieName, m.group(2), m.group(6));
             }   /**
-                * return if line contains a movie
-                */
-            else return String.format("%s~%s~%s", m.group(1).trim(), m.group(2), m.group(6));
-        }
+                 * return if line contains a movie
+                 */
+            else return String.format("%s~%s~%s~false", m.group(1).trim(), m.group(2), m.group(6));
+            }
        
         return "";
     }
