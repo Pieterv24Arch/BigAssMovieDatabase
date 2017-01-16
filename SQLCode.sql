@@ -50,3 +50,16 @@ CREATE TABLE Rol (
   FOREIGN KEY (ActeurNaam) REFERENCES Acteur(Naam),
   FOREIGN KEY (videoMateriaalNaam, videoMateriaalJaar) REFERENCES VideoMateriaal(naam, jaar)
 );
+
+CREATE TABLE Land(
+  Naam VARCHAR(100),
+  PRIMARY KEY (Naam)
+);
+
+CREATE TABLE VideoLand(
+  landNaam VARCHAR(100),
+  videoMateriaalNaam VARCHAR(500),
+  videoMateriaalJaar INT,
+  FOREIGN KEY (landNaam) REFERENCES Land(Naam),
+  FOREIGN KEY (videoMateriaalNaam, videoMateriaalJaar) REFERENCES VideoMateriaal(naam, jaar)
+);
