@@ -17,6 +17,7 @@ public class WriterParser implements ParserBase
      * If empty line is detected the writer in the class is reset.
      * If string matches the name pattern that means a writer name is detected and this writer is in turn saved in the writers array.
      * If string matches the creation pattern the writer is derived from the writers array.
+     * Return Format: Movie/SerieName~ReleaseYear~WriterFistName~WriterLastName~isSerie
      * @param line incomming information
      * @return parsed string or empty string if string does not conform to patterns
      */
@@ -47,7 +48,14 @@ public class WriterParser implements ParserBase
                     if(m.group(i) != null)
                         m.group(i).trim();
                 }
-                return String.format("%s~%s~%s~%s~%s~%s~%s", m.group(2), m.group(1), m.group(3), m.group(4), m.group(6), m.group(8), m.group(9));
+                String movieName = m.group(3);
+                boolean isSerie = false;
+                if(movieName.contains("\""))
+                {
+                    movieName = movieName.replace("\"", "");
+                    isSerie = true;
+                }
+                return String.format("%s~%s~%s~%s~%s", movieName, m.group(4), m.group(2), m.group(1), isSerie);
             }
             return "";
         }
@@ -74,7 +82,14 @@ public class WriterParser implements ParserBase
                         if(m.group(i) != null)
                             m.group(i).trim();
                     }
-                    return String.format("%s~%s~%s~%s~%s~%s~%s", writer[0], writer[1], m.group(1), m.group(2), m.group(4), m.group(5), m.group(6));
+                    String movieName = m.group(1);
+                    boolean isSerie = false;
+                    if(movieName.contains("\""))
+                    {
+                        movieName = movieName.replace("\"", "");
+                        isSerie = true;
+                    }
+                    return String.format("%s~%s~%s~%s~%s", movieName, m.group(2), writer[0], writer[1], isSerie);
                 }
             }
             return "";
