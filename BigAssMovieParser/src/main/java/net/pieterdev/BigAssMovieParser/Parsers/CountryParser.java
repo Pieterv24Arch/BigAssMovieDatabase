@@ -3,8 +3,18 @@ package net.pieterdev.BigAssMovieParser.Parsers;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Parser for the countries list
+ * @author David
+ */
 public class CountryParser implements ParserBase
 {
+    /**
+     * Parser logic is used on given line.
+     * If line does not conform with patterns an empty string is returned.
+     * @param line line to be parsed
+     * @return parsed string or and empty string
+     */
    public String parseString(String line)
     {
         Pattern movieCountriesPattern = getPattern();
