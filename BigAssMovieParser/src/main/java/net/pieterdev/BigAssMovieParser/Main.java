@@ -1,7 +1,6 @@
 package net.pieterdev.BigAssMovieParser;
 
 import net.pieterdev.BigAssMovieParser.Loaders.BaseLoader;
-import net.pieterdev.BigAssMovieParser.Loaders.MovieLoader;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -18,6 +17,9 @@ public class Main {
         System.out.println("(2) MPAA");
         System.out.println("(3) Countries");
         System.out.println("(4) Ratings");
+        System.out.println("(5) Runtimes");
+        System.out.println("(6) Writers");
+        System.out.println("(7) Genres");
         String typeInput = br.readLine();
 
         DataType type = GetDataType(typeInput);
@@ -34,10 +36,7 @@ public class Main {
 
             System.out.println("Busy...");
 
-            if(type.equals(DataType.MOVIES))
-                new MovieLoader(fileLocation, targetLocation);
-            else
-                new BaseLoader(fileLocation, targetLocation, type);
+            new BaseLoader(fileLocation, targetLocation, type);
         }
         else
             System.out.println("Incorrect Input, Exiting!");
@@ -51,6 +50,9 @@ public class Main {
             case "2": return DataType.MPAA;
             case "3": return DataType.COUNTRIES;
             case "4": return DataType.RATINGS;
+            case "5": return DataType.RUNTIMES;
+            case "6": return DataType.WRITERS;
+            case "7": return DataType.GERNES;
         }
         return null;
     }

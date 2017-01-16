@@ -20,6 +20,7 @@ public class MPAAParser implements ParserBase
      * The buffer is emptied everytime a sequence of --- is found.
      * If movie name/year is found buffer is filled.
      * If rating is found it will be appended with the buffer and returned.
+     * Returns format: Movie/SerieName~ReleaseYear~Rating~isSerie
      * @param line line to parse
      * @return parsed string if complete dataset is found otherwise and empty string will be returned.
      */
@@ -51,8 +52,14 @@ public class MPAAParser implements ParserBase
             Matcher m = ratingPattern.matcher(line);
             if(m.find())
             {
-                if(!movieYear.isEmpty() && !movieName.isEmpty())
-                    return String.format("%s~%s~%s", movieName, movieYear, m.group(1));
+                if(!movieYear.isEmpty() && !movieName.isEmpty()) {
+                    boolean isSerie = false;
+                    if (movieName.contains("\"")) {
+                        movieName = movieName.replace("\"", "");
+                        isSerie = true;
+                    }
+                    return String.format("%s~%s~%s~%s", movieName, movieYear, m.group(1), isSerie);
+                }
                 return "";
             }
         }
