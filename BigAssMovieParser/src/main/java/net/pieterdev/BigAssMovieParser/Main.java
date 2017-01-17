@@ -20,6 +20,7 @@ public class Main {
         System.out.println("(5) Runtimes");
         System.out.println("(6) Writers");
         System.out.println("(7) Genres");
+        System.out.println("(8) Biographies");
         String typeInput = br.readLine();
 
         DataType type = GetDataType(typeInput);
@@ -53,6 +54,7 @@ public class Main {
             case "5": return DataType.RUNTIMES;
             case "6": return DataType.WRITERS;
             case "7": return DataType.GERNES;
+            case "8": return DataType.BIOGRAPHY;
         }
         return null;
     }
