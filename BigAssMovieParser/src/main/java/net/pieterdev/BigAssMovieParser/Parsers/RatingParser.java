@@ -35,14 +35,19 @@ public class RatingParser implements ParserBase
             Matcher m = serieRatingPattern.matcher(line);
             if(m.find())
             {
-                String Rating = m.group(1);
-                String SerieTitle = m.group(2);
-                String Year = m.group(3);
-                String EpTitle = m.group(4);
-                String SeasonNr = m.group(5);
-                String EpNr = m.group(6);
-                
-                return String.format("%s%s%s~true", SerieTitle.trim(), Year, Rating);
+                if (line.startsWith("\""))
+                {
+                    String Rating = m.group(1);
+                    String SerieTitle = m.group(2);
+                    String Year = m.group(3);
+                    String EpTitle = m.group(4);
+                    String SeasonNr = m.group(5);
+                    String EpNr = m.group(6);
+
+                    SerieTitle.replace("\"", "").trim();
+                    return String.format("%s%s%s~true", SerieTitle.trim(), Year, Rating);
+                }
+            
             }
             return "";
         }
