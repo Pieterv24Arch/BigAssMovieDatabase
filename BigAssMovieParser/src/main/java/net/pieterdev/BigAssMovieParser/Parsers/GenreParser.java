@@ -9,7 +9,6 @@ public class GenreParser implements ParserBase{
         Pattern genrePattern = getPattern();
        
         Matcher m = genrePattern.matcher(line);
-        System.out.println(line);
         if(m.find()) {
             /**
              * Group 1: Movie/Serie name
