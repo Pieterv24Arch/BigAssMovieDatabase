@@ -9,7 +9,6 @@ public class RuntimeParser implements ParserBase{
         Pattern genrePattern = getPattern();
        
         Matcher m = genrePattern.matcher(line);
-        System.out.println(line);
         if(m.find())
         {
             if(line.startsWith("\""))

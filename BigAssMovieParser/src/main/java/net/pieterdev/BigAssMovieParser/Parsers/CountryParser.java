@@ -17,54 +17,27 @@ public class CountryParser implements ParserBase
      */
    public String parseString(String line)
     {
-        Pattern movieCountriesPattern = getPattern();
-        Pattern serieCountriesPattern = Pattern.compile("(.*)\\((\\d{4}(?:\\/\\w*)?|\\?{4})\\)\\s+(?:\\(.+\\)|\\{(.*?)(?:\\(#(\\d*?)\\.(\\d*?)\\))?\\}|)\\s+(?:\\w+\\:|)(\\w+)");
-        
-        if(serieCountriesPattern.matcher(line).matches())
+        Pattern serieCountriesPattern = Pattern.compile("(.*)\\((\\d{4}(?:\\/\\w*)?)\\)\\s+(?:\\(.+\\)|\\{(.*?)(?:\\(#(\\d*?)\\.(\\d*?)\\))?\\}|)\\s+(?:\\w+\\:|)(\\w+)");
+        /**
+         * Regex pattern series: (.*)\((\d{4}(?:\/\w*)?)\)\s+(?:\(.+\)|\{(.*?)(?:\(#(\d*?)\.(\d*?)\))?\}|)\s+(?:\w+\:|)(\w+)
+         * Group 1: Serie Title; 
+         * Group 2: Year; 
+         * Group 3: Episode Title; 
+         * Group 4: Season Number; 
+         * Group 5: Episode Number;
+         * Group 6: Country;
+         */
+        Matcher m = serieCountriesPattern.matcher(line);
+        if(m.find())
         {
-            /**
-             * Regex pattern series: (.*)\((\d{4}(?:\/\w*)?|\?{4})\)\s+(?:\(.+\)|\{(.*?)(?:\(#(\d*?)\.(\d*?)\))?\}|)\s+(?:\w+\:|)(\w+)
-             * Group 1: Serie Title; 
-             * Group 2: Year; 
-             * Group 3: Episode Title; 
-             * Group 4: Season Number; 
-             * Group 5: Episode Number;
-             * Group 6: Country;
-             */
-            Matcher m = serieCountriesPattern.matcher(line);
-            if(m.find())
+            if (m.group(1).startsWith("\""))
             {
-                String SerieTitle = m.group(1);
-                String Year = m.group(2);
-                String EpTitle = m.group(3);
-                String SeasonNr = m.group(4);
-                String EpNr = m.group(5);
-                String Country = m.group(6);
-                
-                return String.format("%s~%s~%s~%s~%s~%s~true", SerieTitle.trim(), Year, Country.trim());
+                String SerieTitle = m.group(1).replace("\"", "");
+                return String.format("%s~%s~%s~true", SerieTitle.trim(), m.group(2), m.group(6));
             }
-            return "";
+            return String.format("%s~%s~%s~false", m.group(1).trim(), m.group(2), m.group(6));
         }
-        else if (movieCountriesPattern.matcher(line).matches())
-        {
-            /**
-             * Regex pattern movies: (.*)\((\d{4}(?:\/\w*)?|\?{4})\)\s+(?:\(.+\)\s+)?(?:\w+\:|)(.*)
-             * Group 1: Movie Title
-             * Group 2: Year
-             * Group 3: Country
-             */
-            Matcher m = movieCountriesPattern.matcher(line);
-            if(m.find())
-            {
-                String Title = m.group(1);
-                String Year = m.group(2);
-                String Country = m.group(3);
-                return String.format("%s~%s~%s~false", Title.trim(), Year, Country.trim());
-            }
-            return "";
-        }
-        else
-            return "";
+        return "";
     }
 
     public Pattern getPattern()
