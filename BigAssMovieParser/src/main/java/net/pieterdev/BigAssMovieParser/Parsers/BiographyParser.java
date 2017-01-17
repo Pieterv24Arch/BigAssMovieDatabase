@@ -35,7 +35,7 @@ public class BiographyParser implements ParserBase {
                 if(birthInfo.length >= 3)
                 {
                     String locationString = "";
-                    for(int i = birthInfo.length; i >= 0; i--)
+                    for(int i = birthInfo.length-1; i >= 0; i--)
                     {
                         if(!birthInfo[i].matches(".*\\d+.*"))
                         {
