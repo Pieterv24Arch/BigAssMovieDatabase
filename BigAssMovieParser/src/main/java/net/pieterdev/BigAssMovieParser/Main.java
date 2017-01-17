@@ -14,12 +14,14 @@ public class Main {
         System.out.println("What kind of file do you want to convert");
         System.out.println("(0) Movies and Series");
         System.out.println("(1) Actors");
-        System.out.println("(2) MPAA");
-        System.out.println("(3) Countries");
-        System.out.println("(4) Ratings");
-        System.out.println("(5) Runtimes");
-        System.out.println("(6) Writers");
-        System.out.println("(7) Genres");
+        System.out.println("(2) Actors");
+        System.out.println("(3) MPAA");
+        System.out.println("(4) Countries");
+        System.out.println("(5) Ratings");
+        System.out.println("(6) Runtimes");
+        System.out.println("(7) Writers");
+        System.out.println("(8) Genres");
+        System.out.println("(9) Biographies");
         String typeInput = br.readLine();
 
         DataType type = GetDataType(typeInput);
@@ -47,12 +49,14 @@ public class Main {
         switch (type) {
             case "0": return DataType.MOVIES;
             case "1": return DataType.ACTORS;
-            case "2": return DataType.MPAA;
-            case "3": return DataType.COUNTRIES;
-            case "4": return DataType.RATINGS;
-            case "5": return DataType.RUNTIMES;
-            case "6": return DataType.WRITERS;
-            case "7": return DataType.GERNES;
+            case "2": return DataType.ACTRESSES;
+            case "3": return DataType.MPAA;
+            case "4": return DataType.COUNTRIES;
+            case "5": return DataType.RATINGS;
+            case "6": return DataType.RUNTIMES;
+            case "7": return DataType.WRITERS;
+            case "8": return DataType.GERNES;
+            case "9": return DataType.BIOGRAPHY;
         }
         return null;
     }

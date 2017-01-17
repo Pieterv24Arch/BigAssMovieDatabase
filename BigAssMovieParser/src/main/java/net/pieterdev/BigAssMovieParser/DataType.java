@@ -1,14 +1,6 @@
 package net.pieterdev.BigAssMovieParser;
 
-import net.pieterdev.BigAssMovieParser.Parsers.ActorParser;
-import net.pieterdev.BigAssMovieParser.Parsers.CountryParser;
-import net.pieterdev.BigAssMovieParser.Parsers.MPAAParser;
-import net.pieterdev.BigAssMovieParser.Parsers.MovieParser;
-import net.pieterdev.BigAssMovieParser.Parsers.RuntimeParser;
-import net.pieterdev.BigAssMovieParser.Parsers.GenreParser;
-import net.pieterdev.BigAssMovieParser.Parsers.ParserBase;
-import net.pieterdev.BigAssMovieParser.Parsers.RatingParser;
-import net.pieterdev.BigAssMovieParser.Parsers.WriterParser;
+import net.pieterdev.BigAssMovieParser.Parsers.*;
 
 /**
  * Factory for the parser types.
@@ -22,16 +14,20 @@ public enum DataType {
     WRITERS,
     MPAA, 
     COUNTRIES,
-    RATINGS;
+    RATINGS,
+    ACTRESSES,
+    BIOGRAPHY;
 
     MovieParser movieParser = new MovieParser();
     WriterParser writerParser = new WriterParser();
     MPAAParser mpaaParser = new MPAAParser();
-    ActorParser actorParser = new ActorParser();
+    ActorParser actressesParser = new ActorParser(false);
+    ActorParser actorParser = new ActorParser(true);
     CountryParser countriesParser = new CountryParser();
     RatingParser ratingsParser = new RatingParser();
     GenreParser genreParser = new GenreParser();
     RuntimeParser runtimeParser = new RuntimeParser();
+    BiographyParser biographyParser = new BiographyParser();
 
     /**
      * returns preinstantiated of the parser for this type
@@ -43,6 +39,8 @@ public enum DataType {
         {
             case ACTORS:
                 return actorParser;
+            case ACTRESSES:
+                return actressesParser;
             case MOVIES:
                 return movieParser;
             case GERNES:
@@ -57,6 +55,8 @@ public enum DataType {
                 return countriesParser;
             case RATINGS:
                 return ratingsParser;
+            case BIOGRAPHY:
+                return biographyParser;
             default:
                 return null;
         }
