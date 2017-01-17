@@ -57,6 +57,7 @@ public class Main {
             case "7": return DataType.WRITERS;
             case "8": return DataType.GERNES;
             case "9": return DataType.BIOGRAPHY;
+            case "10": return DataType.DIRECTORS;
         }
         return null;
     }
