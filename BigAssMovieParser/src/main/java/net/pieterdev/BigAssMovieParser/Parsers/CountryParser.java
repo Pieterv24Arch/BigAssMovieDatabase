@@ -34,6 +34,8 @@ public class CountryParser implements ParserBase
             Matcher m = serieCountriesPattern.matcher(line);
             if(m.find())
             {
+                if (line.startsWith("\""))
+                {
                 String SerieTitle = m.group(1);
                 String Year = m.group(2);
                 String EpTitle = m.group(3);
@@ -41,8 +43,11 @@ public class CountryParser implements ParserBase
                 String EpNr = m.group(5);
                 String Country = m.group(6);
                 
+                SerieTitle.replace("\"", "").trim();
                 return String.format("%s~%s~%s~%s~%s~%s~true", SerieTitle.trim(), Year, Country.trim());
-            }
+                }
+                
+            } 
             return "";
         }
         else if (movieCountriesPattern.matcher(line).matches())
