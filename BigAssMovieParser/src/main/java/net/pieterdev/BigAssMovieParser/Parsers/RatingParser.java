@@ -16,13 +16,10 @@ public class RatingParser implements ParserBase
      * @return parsed string or and empty string
      */
     public String parseString(String line)
-    {
-        Pattern movieRatingPattern = getPattern();
+    {   
         Pattern serieRatingPattern = Pattern.compile(".*(\\d{1,2}\\.\\d)\\s*(.+)\\((\\d{4})\\)\\s*(?:\\{(.*?)(?:\\(#(\\d*?)\\.(\\d*?)\\))?\\}|)");
 
-        
-        if(serieRatingPattern.matcher(line).matches())
-        {
+            
             /**
              * Pattern Regex Ratings series:  .*(\d{1,2}\.\d)\s*(.+)\((\d{4})\)\s*(?:\{(.*?)(?:\(#(\d*?)\.(\d*?)\))?\}|)
              * Group 1: Rating
@@ -32,50 +29,22 @@ public class RatingParser implements ParserBase
              * Group 5: Season Number; 
              * Group 6: Episode Number;
              */
-            Matcher m = serieRatingPattern.matcher(line);
-            if(m.find())
-            {   
-                String Rating = m.group(1);
-                String SerieTitle = m.group(2);
-                String Year = m.group(3);
-                String EpTitle = m.group(4);
-                String SeasonNr = m.group(5);
-                String EpNr = m.group(6);
-
-                if (SerieTitle.startsWith("\""))
-                {
-                    SerieTitle.replace("\"", "").trim();
-                    return String.format("%s%s%s~true", SerieTitle.trim(), Year, Rating);
-                }
-                return String.format("%s%s%s~true", SerieTitle.trim(), Year, Rating);
-            
-            }
-            return "";
-        }
-        else if (movieRatingPattern.matcher(line).matches())
-        {
-            /**
-             * Pattern Regex Ratings movies:  .*(\d{1,2}\.\d)\s*(.+)\((\d{4})
-             * Group 1: Rating
-             * Group 2: Title
-             * Group 3: Year
-             */
-            Matcher m = movieRatingPattern.matcher(line);
-            if(m.find())
+        Matcher m = serieRatingPattern.matcher(line);
+        if(m.find())
+        { 
+            if (m.group(2).startsWith("\""))
             {
-                String Rating = m.group(1);
-                String MovieTitle = m.group(2);
-                String Year = m.group(3);
-                
-                return String.format("%s~%s~%s~false", MovieTitle.trim(), Year, Rating);
+                String SerieTitle = m.group(2).replace("\"", "");
+                return String.format("%s~%s~%s~true", SerieTitle.trim(), m.group(3), m.group(1));
             }
-            return "";  
+            return String.format("%s~%s~%s~false", m.group(2).trim(), m.group(3), m.group(1));
         }
-        return "";
+        
+    return "";
     }
 
     public Pattern getPattern()
     {
-        return Pattern.compile(".*(\\d{1,2}\\.\\d)\\s*(.+)\\((\\d{4})");
+        return Pattern.compile(".*(\\d{1,2}\\.\\d)\\s*(.+)\\((\\d{4}).+");
     }
 }
