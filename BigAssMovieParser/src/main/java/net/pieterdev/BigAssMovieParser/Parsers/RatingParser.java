@@ -18,8 +18,6 @@ public class RatingParser implements ParserBase
     public String parseString(String line)
     {   
         Pattern serieRatingPattern = Pattern.compile(".*(\\d{1,2}\\.\\d)\\s*(.+)\\((\\d{4})\\)\\s*(?:\\{(.*?)(?:\\(#(\\d*?)\\.(\\d*?)\\))?\\}|)");
-
-            
             /**
              * Pattern Regex Ratings series:  .*(\d{1,2}\.\d)\s*(.+)\((\d{4})\)\s*(?:\{(.*?)(?:\(#(\d*?)\.(\d*?)\))?\}|)
              * Group 1: Rating
@@ -39,7 +37,6 @@ public class RatingParser implements ParserBase
             }
             return String.format("%s~%s~%s~false", m.group(2).trim(), m.group(3), m.group(1));
         }
-        
     return "";
     }
 
