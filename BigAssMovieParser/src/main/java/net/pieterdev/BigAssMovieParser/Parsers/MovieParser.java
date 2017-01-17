@@ -19,20 +19,18 @@ public class MovieParser implements ParserBase {
      */
     public String parseString(String line) {
         Pattern moviePattern = getPattern();
-        Pattern seriePattern = Pattern.compile("(.*?)\\(([\\d{4}]*)(?:\\/)?[\\w]*?\\)\\s*\\{(.*?)(\\(#(\\d*?)\\.(\\d*?)\\))?\\}.*");
+        Pattern seriePattern = Pattern.compile("(.*?)(?: \\()([\\d{4}]*)(?:\\/)?[\\w]*?\\)\\s*\\{(.*?)(\\(#(\\d*?)\\.(\\d*?)\\))?\\}.*");
 
+        //Remove series that have episodes0
         if (seriePattern.matcher(line).matches()) {
             /**
+             * Because we don't want duplicates these are to be removed
              * Group 1: Movie/Serie Name.
              * Group 2: Movie/Serie Year.
              * Group 3: Episode name(null if not episode)
              * Group 5: Season nr(null if not found)
              * Group 6: Episode nr(null if not found)
              */
-            Matcher m = seriePattern.matcher(line);
-            if (m.find()) {
-                return isSerie(m);
-            }
             return "";
         } else if (moviePattern.matcher(line).matches()) {
             /**
@@ -61,6 +59,6 @@ public class MovieParser implements ParserBase {
 
     public Pattern getPattern()
     {
-        return Pattern.compile("(.*?)\\(([\\d{4}]*)(?:\\/)?[\\w]*?\\).*");
+        return Pattern.compile("(.*?)(?: \\()([\\d{4}]*)(?:\\/)?[\\w]*?\\).*");
     }
 }
