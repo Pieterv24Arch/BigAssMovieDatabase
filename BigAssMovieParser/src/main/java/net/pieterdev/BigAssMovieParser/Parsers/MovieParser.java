@@ -54,7 +54,7 @@ public class MovieParser implements ParserBase {
             name = name.replace("\"", "");
             isSerie = true;
         }
-        return String.format("%s~%s~%s", name.trim(), m.group(2), isSerie);
+        return String.format("%s\t%s\t%s", name.trim(), m.group(2), isSerie);
     }
 
     public Pattern getPattern()
