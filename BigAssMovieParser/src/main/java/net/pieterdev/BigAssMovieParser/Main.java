@@ -22,6 +22,7 @@ public class Main {
         System.out.println("(7) Writers");
         System.out.println("(8) Genres");
         System.out.println("(9) Biographies");
+        System.out.println("(10) Directors");
         String typeInput = br.readLine();
 
         DataType type = GetDataType(typeInput);
