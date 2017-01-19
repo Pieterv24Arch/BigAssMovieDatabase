@@ -55,7 +55,7 @@ public class WriterParser implements ParserBase
                     movieName = movieName.replace("\"", "");
                     isSerie = true;
                 }
-                return String.format("%s~%s~%s~%s~%s", movieName, m.group(4), m.group(2), m.group(1), isSerie);
+                return String.format("%s\t%s\t%s\t%s\t%s", movieName, m.group(4), m.group(2), m.group(1), isSerie);
             }
             return "";
         }
@@ -89,7 +89,7 @@ public class WriterParser implements ParserBase
                         movieName = movieName.replace("\"", "");
                         isSerie = true;
                     }
-                    return String.format("%s~%s~%s~%s~%s", movieName, m.group(2), writer[0], writer[1], isSerie);
+                    return String.format("%s\t%s\t%s\t%s\t%s", movieName, m.group(2), writer[0], writer[1], isSerie);
                 }
             }
             return "";

@@ -29,7 +29,7 @@ public class DirectorParser implements ParserBase
                 if(m.group(3).isEmpty())
                     return "";
 
-                return String.format("%s~%s~%s", prevDirector, m.group(2), m.group(3));
+                return String.format("%s\t%s\t%s", prevDirector, m.group(2), m.group(3));
             }
             return "";
         }

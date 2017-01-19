@@ -33,9 +33,9 @@ public class RatingParser implements ParserBase
             if (m.group(2).startsWith("\""))
             {
                 String SerieTitle = m.group(2).replace("\"", "");
-                return String.format("%s~%s~%s~true", SerieTitle.trim(), m.group(3), m.group(1));
+                return String.format("%s\t%s\t%s\ttrue", SerieTitle.trim(), m.group(3), m.group(1));
             }
-            return String.format("%s~%s~%s~false", m.group(2).trim(), m.group(3), m.group(1));
+            return String.format("%s\t%s\t%s\tfalse", m.group(2).trim(), m.group(3), m.group(1));
         }
     return "";
     }

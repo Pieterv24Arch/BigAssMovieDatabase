@@ -43,7 +43,7 @@ public class ActorParser implements ParserBase {
                     if(m.group(i) != null)
                         m.group(i).trim();
 
-                String next = String.format("%s~%s~%s~%s~%s~%s", actor, m.group(2).replace("\"", ""), m.group(3), m.group(4), m.group(4), isMale ? "m" : "f", actor.contains("\""));
+                String next = String.format("%s\t%s\t%s\t%s\t%s\t%s", actor, m.group(2).replace("\"", ""), m.group(3), m.group(4), m.group(4), isMale ? "m" : "f", actor.contains("\""));
                 if(!next.equals(previousInput)) {
                     previousInput = next;
                     return next;
