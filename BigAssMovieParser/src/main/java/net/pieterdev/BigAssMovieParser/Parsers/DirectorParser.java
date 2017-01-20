@@ -31,7 +31,7 @@ public class DirectorParser implements ParserBase
                     movieName = movieName.replace("\"", "");
                     isSerie = true;
                 }
-                return String.format("%s\t%s\t%s\t%s", movieName, m.group(4), prevDirector, isSerie);
+                return String.format("%s\t%s\t%s\t%s", movieName.trim(), m.group(4).trim(), prevDirector.trim(), isSerie);
             }
         }
         else if(creationPattern.matcher(line).matches())
@@ -50,7 +50,7 @@ public class DirectorParser implements ParserBase
                         movieName = movieName.replace("\"", "");
                         isSerie = true;
                     }
-                    return String.format("%s\t%s\t%s\t%s", movieName, m.group(2), prevDirector, isSerie);
+                    return String.format("%s\t%s\t%s\t%s", movieName.trim(), m.group(2).trim(), prevDirector.trim(), isSerie);
                 }
             }
         }
