@@ -58,7 +58,7 @@ public class MPAAParser implements ParserBase
                         movieName = movieName.replace("\"", "");
                         isSerie = true;
                     }
-                    return String.format("%s~%s~%s~%s", movieName, movieYear, m.group(1), isSerie);
+                    return String.format("%s\t%s\t%s\t%s", movieName, movieYear, m.group(1), isSerie);
                 }
                 return "";
             }

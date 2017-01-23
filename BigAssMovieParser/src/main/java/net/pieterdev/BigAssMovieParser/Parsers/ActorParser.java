@@ -44,7 +44,7 @@ public class ActorParser implements ParserBase {
                         m.group(i).trim();
 
                 boolean isSerie = actor.contains("\"");
-                String next = String.format("%s~%s~%s~%s~%s~%s", actor, m.group(2).replace("\"", ""), m.group(3), m.group(4), m.group(5), isMale ? "m" : "f", isSerie);
+                String next = String.format("%s\t%s\t%s\t%s\t%s\t%s", actor, m.group(2).replace("\"", ""), m.group(3), m.group(4), m.group(5), isMale ? "m" : "f", isSerie);
                 if(!next.equals(previousInput)) {
                     previousInput = next;
                     return next;

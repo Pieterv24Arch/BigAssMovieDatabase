@@ -8,6 +8,9 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.sql.Time;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
@@ -28,6 +31,9 @@ public class BaseLoader {
      */
     public BaseLoader(String sourceFile, String targetFile, DataType dataType)
     {
+        Date beginTime = new Date();
+        SimpleDateFormat df = new SimpleDateFormat("hh:mm");
+        System.out.println("Current time is: " + df.format(beginTime));
         try(Stream<String> lines = Files.lines(new File(sourceFile).toPath(), StandardCharsets.ISO_8859_1))
         {
             StreamOperations(lines, dataType, targetFile);
@@ -37,6 +43,9 @@ public class BaseLoader {
         {
             ex.printStackTrace();
         }
+        Date stopTime = new Date();
+        System.out.println("Current time is: " + df.format(stopTime));
+        System.out.println(((stopTime.getTime() - beginTime.getTime()) / 1000) + " Seconds have elapsed");
     }
 
 

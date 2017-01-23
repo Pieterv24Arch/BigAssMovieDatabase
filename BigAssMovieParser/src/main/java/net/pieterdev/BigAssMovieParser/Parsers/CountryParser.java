@@ -17,7 +17,7 @@ public class CountryParser implements ParserBase
      */
    public String parseString(String line)
     {
-        Pattern serieCountriesPattern = Pattern.compile("(.*)\\((\\d{4}(?:\\/\\w*)?)\\)\\s+(?:\\(.+\\)|\\{(.*?)(?:\\(#(\\d*?)\\.(\\d*?)\\))?\\}|)\\s+(?:\\w+\\:|)(\\w+)");
+        Pattern serieCountriesPattern = Pattern.compile("(.*)\\((\\d{4})(?:\\/\\w*?)\\)\\s+(?:\\(.+\\)|\\{(.*?)(?:\\(#(\\d*?)\\.(\\d*?)\\))?\\}|)\\s+(?:\\w+\\:|)(\\w+)");
         /**
          * Regex pattern series: (.*)\((\d{4}(?:\/\w*)?)\)\s+(?:\(.+\)|\{(.*?)(?:\(#(\d*?)\.(\d*?)\))?\}|)\s+(?:\w+\:|)(\w+)
          * Group 1: Serie Title; 
@@ -33,9 +33,9 @@ public class CountryParser implements ParserBase
             if (m.group(1).startsWith("\""))
             {
                 String SerieTitle = m.group(1).replace("\"", "");
-                return String.format("%s~%s~%s~true", SerieTitle.trim(), m.group(2), m.group(6));
+                return String.format("%s\t%s\t%s\ttrue", SerieTitle.trim(), m.group(2), m.group(6));
             }
-            return String.format("%s~%s~%s~false", m.group(1).trim(), m.group(2), m.group(6));
+            return String.format("%s\t%s\t%s\tfalse", m.group(1).trim(), m.group(2), m.group(6));
         }
         return "";
     }

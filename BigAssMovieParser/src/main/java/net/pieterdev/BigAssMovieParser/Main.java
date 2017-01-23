@@ -14,7 +14,7 @@ public class Main {
         System.out.println("What kind of file do you want to convert");
         System.out.println("(0) Movies and Series");
         System.out.println("(1) Actors");
-        System.out.println("(2) Actors");
+        System.out.println("(2) Actresses");
         System.out.println("(3) MPAA");
         System.out.println("(4) Countries");
         System.out.println("(5) Ratings");
@@ -22,6 +22,7 @@ public class Main {
         System.out.println("(7) Writers");
         System.out.println("(8) Genres");
         System.out.println("(9) Biographies");
+        System.out.println("(10) Directors");
         String typeInput = br.readLine();
 
         DataType type = GetDataType(typeInput);

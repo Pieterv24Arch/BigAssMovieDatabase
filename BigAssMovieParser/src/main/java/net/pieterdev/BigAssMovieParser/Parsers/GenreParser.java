@@ -23,17 +23,17 @@ public class GenreParser implements ParserBase{
                  * return if line contains a serie
                  */
                 String serieName = m.group(1).replace("\"", "").trim();
-                return String.format("%s~%s~%s~true", serieName, m.group(2), m.group(6));
+                return String.format("%s\t%s\t%s\ttrue", serieName, m.group(2), m.group(6));
             }   /**
              * return if line contains a movie
              */
-            else return String.format("%s~%s~%s~false", m.group(1).trim(), m.group(2), m.group(6));
+            else return String.format("%s\t%s\t%s\tfalse", m.group(1).trim(), m.group(2), m.group(6));
         }
         return "";
     }
 
     public Pattern getPattern()
     {
-        return Pattern.compile("(.*)\\(([\\d{4}]*)\\)\\s+(?:\\(.+\\)|\\{(.*?)(?:\\(#(\\d*?)\\.(\\d*?)\\))?\\}|)\\s+(.+)");
+        return Pattern.compile("(.*)\\(([\\d{4}]*)\\)\\s+(?:\\(.+\\)|\\{(.*?)(?:\\(#(\\d*?)\\.(\\d*?)\\))?\\}|)\\t+(.+)");
     }
 }
