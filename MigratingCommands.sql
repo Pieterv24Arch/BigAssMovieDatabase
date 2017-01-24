@@ -23,6 +23,11 @@ INSERT INTO bigmovie.videomateriaal(naam, jaar, isserie) (
     SELECT DISTINCT name, releaseyear, videos.isserie FROM "bigmovieStaging".videos
 );
 
+--Add actors to acteur table
+INSERT INTO bigmovie.acteur (naam, isman) (
+  SELECT DISTINCT name, ismale FROM "bigmovieStaging".actors
+);
+
 --Add movie runtime to corresponding movie
 UPDATE bigmovie.videomateriaal AS new
   SET duur = stage.runtime
@@ -87,3 +92,10 @@ INSERT INTO bigmovie.videoschrijver (schrijvernaam, videomateriaalnaam, videomat
       INNER JOIN bigmovie.videomateriaal AS ref
       ON stage.moviename = ref.naam AND stage.releaseyear = ref.jaar AND stage.isserie = ref.isserie
       WHERE (stage.name, stage.lastname) IN (SELECT schrijver.naam, schrijver.achternaam  FROM bigmovie.schrijver)
+
+--Add references between movies/series and actors
+INSERT INTO bigmovie.rol (acteurnaam, videomateriaalnaam, videomateriaaljaar, isserie, rolnaam, priroriteit)
+    SELECT stage.name, stage.moviename, stage.releaseyear, stage.isserie, stage.role, stage.payroll FROM "bigmovieStaging".actors AS stage
+      INNER JOIN bigmovie.videomateriaal AS ref
+      ON stage.moviename = ref.naam AND stage.releaseyear = ref.jaar AND stage.isserie = ref.isserie
+      WHERE (stage.name) IN (SELECT acteur.naam FROM bigmovie.acteur);
