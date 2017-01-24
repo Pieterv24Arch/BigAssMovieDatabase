@@ -10,7 +10,7 @@ import org.json.*;
 
 public class GetGeocode {
     private Connection conn;
-    private String apiUrl = "https://api.mapbox.com/geocoding/v5/mapbox.places/";
+    private String apiUrl = "http://api.mapbox.com/geocoding/v5/mapbox.places/";
     private String accesToken = "?access_token=pk.eyJ1IjoicGlldGVydjI0IiwiYSI6ImNpeTl6emdieDAwMmIycXJ1eHIxOGllM28ifQ.1pBeyHG__iHlSgrR3hsidQ";
     public GetGeocode(Connection conn)
     {
@@ -20,6 +20,7 @@ public class GetGeocode {
     public void run() throws Exception
     {
         Statement stmt = conn.createStatement();
+        Statement updateStatement = conn.createStatement();
 
         String sql = "SELECT * FROM \"bigmovieStaging\".birthplaces AS place WHERE place.coords IS NULL";
         ResultSet rs = stmt.executeQuery(sql);
@@ -28,25 +29,29 @@ public class GetGeocode {
         while (rs.next()){
             try{
                 String birthplace = rs.getString("birthplace");
-                System.out.println(birthplace.substring(0, birthplace.length()-1));
+                System.out.println("Geocoding: " + birthplace.substring(0, birthplace.length()-1));
                 String[] location = birthplace.substring(0, birthplace.length()-1).split(",");
                 JSONObject json = readJSONfromURL(urlBuilder(location));
 
-                System.out.println(json.toString());
-
                 JSONArray arr = json.getJSONArray("features");
+                if(arr.length() == 0){
+                    System.out.println("No geocode found");
+                    continue;
+                }
                 JSONObject firstEntry = arr.getJSONObject(0);
                 JSONArray coords = firstEntry.getJSONArray("center");
 
                 String coordString = coords.getDouble(1) + "," + coords.getDouble(0);
                 String updateSQL = String.format("UPDATE \"bigmovieStaging\".birthplaces SET coords = \'%s\' WHERE birthplace = \'%s\'", coordString, birthplace);
-                stmt.executeUpdate(updateSQL);
+                updateStatement.executeUpdate(updateSQL);
+
+                System.out.println("Geocoding success.");
 
                 count++;
             }
             catch (Exception ex)
             {
-                System.out.println("Something went wrong. Continuing");
+                System.out.println("Something went wrong. Continuing\n"+ex);
             }
         }
         System.out.println("There were: " + count + " entries");
@@ -54,16 +59,16 @@ public class GetGeocode {
 
     private JSONObject readJSONfromURL(String apiUrl) throws Exception{
         URL url = new URL(apiUrl);
-        HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-        conn.setRequestMethod("GET");
-        conn.connect();
-
-        if(conn.getResponseCode() == 429 || conn.getResponseMessage() != "OK"){
+        HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+        connection.setRequestMethod("GET");
+        connection.connect();
+        //String test = conn.getResponseMessage();
+        if(connection.getResponseCode() == 429){
+            System.out.println("Timeout invoked");
             TimeUnit.MINUTES.sleep(1);
             readJSONfromURL(apiUrl);
-            System.out.println("Timeout invoked");
         }
-        InputStream is = conn.getInputStream();
+        InputStream is = connection.getInputStream();
         try {
             BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
             String jsonText = readAll(rd);
@@ -72,6 +77,7 @@ public class GetGeocode {
         }
         finally {
             is.close();
+            connection.disconnect();
         }
     }
     private String readAll(Reader rd) throws IOException{
@@ -89,7 +95,7 @@ public class GetGeocode {
         String terms = "";
         for(int i = 0; i < args.length; i++)
         {
-            terms += args[i];
+            terms += args[i].trim();
             if(i != args.length -1)
                 terms+= "+";
         }
