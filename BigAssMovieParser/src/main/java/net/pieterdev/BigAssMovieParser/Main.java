@@ -23,6 +23,8 @@ public class Main {
         System.out.println("(8) Genres");
         System.out.println("(9) Biographies");
         System.out.println("(10) Directors");
+        System.out.println("(11) Production");
+        System.out.println("(12) Business");
         String typeInput = br.readLine();
 
         DataType type = GetDataType(typeInput);
@@ -59,6 +61,8 @@ public class Main {
             case "8": return DataType.GERNES;
             case "9": return DataType.BIOGRAPHY;
             case "10": return DataType.DIRECTORS;
+            case "11": return DataType.PRODUCTION;
+            case "12": return DataType.BUSINESS;
         }
         return null;
     }

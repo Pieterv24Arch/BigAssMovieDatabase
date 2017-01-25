@@ -42,7 +42,7 @@ public class ActorParser implements ParserBase {
                 String payrol = m.group(5) == null || m.group(5).isEmpty() ? "0" : m.group(5);
 
                 boolean isSerie = actor.contains("\"");
-                String next = String.format("%s|%s|%s|%s|%s|%s|%s", actor.trim(), m.group(4).trim(), payrol, m.group(2).replace("\"", "").trim(), m.group(3).trim(), isMale, isSerie);
+                String next = String.format("%s\t%s\t%s\t%s\t%s\t%s\t%s", actor.trim(), m.group(4).trim(), payrol, m.group(2).replace("\"", "").trim(), m.group(3).trim(), isMale, isSerie);
                 if(!next.equals(previousInput)) {
                     previousInput = next;
                     return next;
