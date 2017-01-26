@@ -10,7 +10,7 @@ INSERT INTO bigmovie.genre (
 
 --Add data to land table
 INSERT INTO bigmovie.land (
-  SELECT DISTINCT country FROM "bigmovieStaging".countries
+  SELECT DISTINCT country FROM "bigmovieStaging"."production-companies"
 );
 
 --Add data to director table
@@ -21,6 +21,11 @@ INSERT INTO bigmovie.regiseur (
 --Add movies to videomateriaal table
 INSERT INTO bigmovie.videomateriaal(naam, jaar, isserie) (
     SELECT DISTINCT name, releaseyear, videos.isserie FROM "bigmovieStaging".videos
+);
+
+--Add actors to acteur table
+INSERT INTO bigmovie.acteur (naam, isman) (
+  SELECT DISTINCT name, ismale FROM "bigmovieStaging".actors
 );
 
 --Add movie runtime to corresponding movie
@@ -64,13 +69,13 @@ UPDATE bigmovie.videomateriaal AS new
 
 --Add references between movies/series and genres
 INSERT INTO bigmovie.videogenre (genretype, videomateriaalnaam, videomateriaaljaar, isserie)
-    SELECT stage.genre, stage.moviename, stage.releaseyear, stage.isserie FROM "bigmovieStaging".genres AS stage
+    SELECT DISTINCT stage.genre, stage.moviename, stage.releaseyear, stage.isserie FROM "bigmovieStaging".genres AS stage
       INNER JOIN bigmovie.videomateriaal AS ref
       ON stage.moviename = ref.naam AND stage.releaseyear = ref.jaar AND stage.isserie = ref.isserie;
 
 --Add references between movies/series and countries
 INSERT INTO bigmovie.videoland (landnaam, videomateriaalnaam, videomateriaaljaar, isserie)
-    SELECT stage.country, stage.moviename, stage.releaseyear, stage.isserie FROM "bigmovieStaging".countries AS stage
+    SELECT DISTINCT stage.country, stage.moviename, stage.releaseyear, stage.isserie FROM "bigmovieStaging"."production-companies" AS stage
       INNER JOIN bigmovie.videomateriaal AS ref
       ON stage.moviename = ref.naam AND stage.releaseyear = ref.jaar AND stage.isserie = ref.isserie;
 
@@ -87,3 +92,10 @@ INSERT INTO bigmovie.videoschrijver (schrijvernaam, videomateriaalnaam, videomat
       INNER JOIN bigmovie.videomateriaal AS ref
       ON stage.moviename = ref.naam AND stage.releaseyear = ref.jaar AND stage.isserie = ref.isserie
       WHERE (stage.name, stage.lastname) IN (SELECT schrijver.naam, schrijver.achternaam  FROM bigmovie.schrijver)
+
+--Add references between movies/series and actors
+INSERT INTO bigmovie.rol (acteurnaam, videomateriaalnaam, videomateriaaljaar, isserie, rolnaam, priroriteit)
+    SELECT DISTINCT stage.name, stage.moviename, stage.releaseyear, stage.isserie, stage.role, stage.payroll FROM "bigmovieStaging".actors AS stage
+      INNER JOIN bigmovie.videomateriaal AS ref
+      ON stage.moviename = ref.naam AND stage.releaseyear = ref.jaar AND stage.isserie = ref.isserie
+      WHERE (stage.name) IN (SELECT acteur.naam FROM bigmovie.acteur);

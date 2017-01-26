@@ -42,7 +42,7 @@ public class GetGeocode {
                 JSONArray coords = firstEntry.getJSONArray("center");
 
                 String coordString = coords.getDouble(1) + "," + coords.getDouble(0);
-                String updateSQL = String.format("UPDATE \"bigmovieStaging\".birthplaces SET coords = \'%s\' WHERE birthplace = \'%s\'", coordString, birthplace);
+                String updateSQL = String.format("UPDATE \"bigmovieStaging\".birthplaces SET coords = \'%s\' WHERE birthplace = \'%s\'", coordString, birthplace.replace("'", "''"));
                 updateStatement.executeUpdate(updateSQL);
 
                 System.out.println("Geocoding success.");
@@ -52,6 +52,7 @@ public class GetGeocode {
             catch (Exception ex)
             {
                 System.out.println("Something went wrong. Continuing\n"+ex);
+                System.in.read();
             }
         }
         System.out.println("There were: " + count + " entries");
@@ -62,7 +63,7 @@ public class GetGeocode {
         HttpURLConnection connection = (HttpURLConnection)url.openConnection();
         connection.setRequestMethod("GET");
         connection.connect();
-        //String test = conn.getResponseMessage();
+
         if(connection.getResponseCode() == 429){
             System.out.println("Timeout invoked");
             TimeUnit.MINUTES.sleep(1);
@@ -95,7 +96,7 @@ public class GetGeocode {
         String terms = "";
         for(int i = 0; i < args.length; i++)
         {
-            terms += args[i].trim();
+            terms += args[i].trim().replace(" ", "%20").replace("/", "+");
             if(i != args.length -1)
                 terms+= "+";
         }

@@ -39,12 +39,10 @@ public class ActorParser implements ParserBase {
                 if(!m.group(1).trim().isEmpty())
                     actor = m.group(1);
 
-                for (int i = 1; i <= m.groupCount(); i++)
-                    if(m.group(i) != null)
-                        m.group(i).trim();
+                String payrol = m.group(5) == null || m.group(5).isEmpty() ? "0" : m.group(5);
 
                 boolean isSerie = actor.contains("\"");
-                String next = String.format("%s\t%s\t%s\t%s\t%s\t%s", actor, m.group(2).replace("\"", ""), m.group(3), m.group(4), m.group(5), isMale ? "m" : "f", isSerie);
+                String next = String.format("%s\t%s\t%s\t%s\t%s\t%s\t%s", actor.trim(), m.group(4).trim(), payrol, m.group(2).replace("\"", "").trim(), m.group(3).trim(), isMale, isSerie);
                 if(!next.equals(previousInput)) {
                     previousInput = next;
                     return next;
