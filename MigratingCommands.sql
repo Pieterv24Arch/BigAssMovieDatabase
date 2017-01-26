@@ -3,6 +3,10 @@ INSERT INTO bigmovie.schrijver (
   SELECT DISTINCT name, lastname FROM "bigmovieStaging".writers
 );
 
+--Add data to geboorteplaats table
+INSERT INTO bigmovie.geboorteplaatsen (geboorteplaats, coords)
+    SELECT birthplace, coords FROM "bigmovieStaging".birthplaces;
+
 --Add data to genre table
 INSERT INTO bigmovie.genre (
   SELECT DISTINCT genre FROM "bigmovieStaging".genres
@@ -44,6 +48,12 @@ UPDATE bigmovie.videomateriaal AS new
       GROUP BY moviename, releaseyear, "running-times".isserie
        )AS stage
   WHERE (new.naam = stage.moviename AND new.jaar = stage.releaseyear AND new.isserie = stage.isserie);
+
+--Add birthplaces to actors
+UPDATE bigmovie.acteur AS new
+  SET geboorteplaats = stage.birthplace
+  FROM (SELECT * FROM "bigmovieStaging".biographies) AS stage
+  WHERE stage.name = new.naam;
 
 --Add Mpaa ratings to videomateriaal
 UPDATE bigmovie.videomateriaal AS new
@@ -99,3 +109,9 @@ INSERT INTO bigmovie.rol (acteurnaam, videomateriaalnaam, videomateriaaljaar, is
       INNER JOIN bigmovie.videomateriaal AS ref
       ON stage.moviename = ref.naam AND stage.releaseyear = ref.jaar AND stage.isserie = ref.isserie
       WHERE (stage.name) IN (SELECT acteur.naam FROM bigmovie.acteur);
+
+--Add references between movies/series and their income
+INSERT INTO bigmovie.opbrengsten(videomateriaalnaam, videomateriaaljaar, isserie, valuta, hoeveelheid, origine)
+    SELECT DISTINCT stage.moviename, stage.movieyear, stage.isserie, stage.currency, stage.amount, stage.type FROM "bigmovieStaging".business AS stage
+      INNER JOIN bigmovie.videomateriaal AS ref
+      ON stage.moviename = ref.naam AND stage.movieyear = ref.jaar AND stage.isserie = ref.isserie;
