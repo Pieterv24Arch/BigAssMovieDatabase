@@ -1,3 +1,6 @@
+package fx;
+
+import fx.Controllers.MainController;
 import javafx.fxml.FXMLLoader;
 
 import java.io.IOException;
@@ -13,9 +16,11 @@ public class VistaNavigator {
     /**
      * Convenience constants for fxml layouts managed by the navigator.
      */
-    public static final String MAIN = "main.fxml";
-    public static final String HOME = "home.fxml";
-    public static final String PARSERS = "parsers.fxml";
+    public static final String MAIN = "FXML/main.fxml";
+    public static final String HOME = "FXML/home.fxml";
+    public static final String PARSERS = "FXML/parsers.fxml";
+    public static final String RESULTSET = "FXML/resultset.fxml";
+    public static final String MAPVIEW = "FXML/mapviewer.fxml";
 
     /** The main application layout controller. */
     private static MainController mainController;

@@ -1,3 +1,6 @@
+package fx.Controllers;
+
+import fx.VistaNavigator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -31,7 +34,12 @@ public class MainController {
     }
 
     @FXML
+    void NavigateToMapView(ActionEvent event) {
+        VistaNavigator.loadVista(VistaNavigator.MAPVIEW);
+    }
+
+    @FXML
     void NavigateToResultSet(ActionEvent event) {
-        VistaNavigator.loadVista(VistaNavigator.PARSERS);
+        VistaNavigator.loadVista(VistaNavigator.RESULTSET);
     }
 }

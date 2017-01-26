@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ParserController">
+<VBox prefHeight="400.0" prefWidth="640.0" style="-fx-background-color: transparent;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.Controllers.ParserController">
   <children>
       <Label text="Parsers">
          <font>
@@ -72,9 +72,9 @@
             </JFXButton>
          </children>
       </HBox>
-      <JFXTextArea fx:id="outputLog" editable="false" maxHeight="1.7976931348623157E308" style="-fx-background-color: transparent;">
+      <JFXTextArea fx:id="outputLog" editable="false" maxHeight="1.7976931348623157E308" style="-fx-background-color: transparent;" VBox.vgrow="ALWAYS">
          <VBox.margin>
-            <Insets bottom="10.0" top="10.0" />
+            <Insets bottom="15.0" top="15.0" />
          </VBox.margin>
       </JFXTextArea>
   </children>

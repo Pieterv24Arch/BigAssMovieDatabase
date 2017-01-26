@@ -1,10 +1,13 @@
-import FileManipulation.DataType;
-import FileManipulation.LoaderOnFinished;
+package fx.Controllers;
+
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
-import javafx.concurrent.Task;
+import fx.FileManipulation.DataType;
+import fx.FileManipulation.LoaderOnFinished;
+import fx.FileManipulation.Loaders.BaseLoader;
+import fx.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,12 +19,10 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import FileManipulation.Loaders.BaseLoader;
-
 /**
  * Created by rainslayerx on 1/26/17.
  */
-public class ParserController implements Initializable, LoaderOnFinished {
+public class ParserController extends Controller implements Initializable, LoaderOnFinished {
     @FXML
     private JFXTextField inputFileLocation;
     @FXML
@@ -85,15 +86,6 @@ public class ParserController implements Initializable, LoaderOnFinished {
         BaseLoader.onFinishedParsing = this;
         Runnable task = () -> new BaseLoader(fileLocation, outputFileLocation.getText(), GetDataType(fileTypeSelector.getSelectionModel().getSelectedIndex()));
         new Thread(task).start();
-    }
-
-    private void ShowAlert(String text) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Alert");
-        alert.setHeaderText(null);
-        alert.setContentText(text);
-
-        alert.showAndWait();
     }
 
     private static DataType GetDataType(int type)

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.web.WebView?>
+
+<ScrollPane fitToHeight="true" fitToWidth="true" focusTraversable="false" style="-fx-background-color: transparent;" stylesheets="@style.css" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.Controllers.MapViewController">
+   <content>
+      <VBox prefHeight="400.0" prefWidth="640.0" style="-fx-background-color: white;" stylesheets="@style.css">
+        <children>
+            <Label text="Map Viewer">
+               <font>
+                  <Font name="Roboto" size="48.0" />
+               </font>
+            </Label>
+            <Label text="Below you will see the birtplaces of all registered actors and actresses" />
+            <WebView fx:id="mapView" contextMenuEnabled="false" prefHeight="-1.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+               <VBox.margin>
+                  <Insets bottom="-25.0" left="-25.0" right="-25.0" top="15.0" />
+               </VBox.margin>
+            </WebView>
+        </children>
+         <padding>
+            <Insets bottom="25.0" left="25.0" right="25.0" top="10.0" />
+         </padding>
+      </VBox>
+   </content>
+</ScrollPane>

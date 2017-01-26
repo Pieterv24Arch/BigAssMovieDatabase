@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane fitToHeight="true" fitToWidth="true" focusTraversable="false" style="-fx-background-color: transparent;" stylesheets="@style.css" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.Controllers.DataSetController">
+   <content>
+      <VBox prefHeight="400.0" prefWidth="640.0" style="-fx-background-color: white;" stylesheets="@style.css">
+        <children>
+            <Label text="Simple Data">
+               <font>
+                  <Font name="Roboto" size="48.0" />
+               </font>
+            </Label>
+            <Label text="Below you will see our findings on the asked questions" />
+            <Separator layoutX="35.0" layoutY="208.0" prefWidth="200.0">
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin>
+            </Separator>
+            <Label text="Simple table data" />
+            <HBox>
+               <children>
+                  <JFXComboBox fx:id="comboBox" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+                  <JFXButton minWidth="150.0" onAction="#RequestData" styleClass="button-raised" text="Request Data" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </JFXButton>
+               </children>
+            </HBox>
+            <JFXTextArea fx:id="textView" VBox.vgrow="ALWAYS">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Roboto Mono" size="12.0" />
+               </font>
+            </JFXTextArea>
+        </children>
+         <padding>
+            <Insets bottom="25.0" left="25.0" right="25.0" top="10.0" />
+         </padding>
+      </VBox>
+   </content>
+</ScrollPane>

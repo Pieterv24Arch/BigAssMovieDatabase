@@ -1,6 +1,6 @@
-package FileManipulation;
+package fx.FileManipulation;
 
-import FileManipulation.Parsers.*;
+import fx.FileManipulation.Parsers.*;
 
 /**
  * Factory for the parser types.

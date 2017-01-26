@@ -1,9 +1,9 @@
-package FileManipulation.Loaders;
+package fx.FileManipulation.Loaders;
 
-import FileManipulation.DataType;
-import FileManipulation.LoaderOnFinished;
-import FileManipulation.Parsers.ParserBase;
 import com.jfoenix.controls.JFXTextArea;
+import fx.FileManipulation.DataType;
+import fx.FileManipulation.LoaderOnFinished;
+import fx.FileManipulation.Parsers.ParserBase;
 import javafx.application.Platform;
 
 import java.io.File;
@@ -13,7 +13,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.function.Function;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 

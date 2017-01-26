@@ -1,3 +1,6 @@
+package fx;
+
+import fx.Controllers.MainController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -38,7 +41,7 @@ public class Main extends Application {
     private Pane loadMainPane() throws IOException {
         FXMLLoader loader = new FXMLLoader();
 
-        Pane mainPane = (Pane) loader.load(
+        Pane mainPane = loader.load(
                 getClass().getResourceAsStream(
                         VistaNavigator.MAIN
                 )
@@ -65,7 +68,7 @@ public class Main extends Application {
         );
 
         scene.getStylesheets().setAll(
-                getClass().getResource("style.css").toExternalForm()
+                getClass().getResource("FXML/style.css").toExternalForm()
         );
 
         return scene;

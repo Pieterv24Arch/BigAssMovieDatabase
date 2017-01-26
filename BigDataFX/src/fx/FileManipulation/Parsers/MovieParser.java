@@ -1,6 +1,5 @@
-package FileManipulation.Parsers;
+package fx.FileManipulation.Parsers;
 
-import java.util.Dictionary;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
