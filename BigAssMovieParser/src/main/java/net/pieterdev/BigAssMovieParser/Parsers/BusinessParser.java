@@ -8,7 +8,7 @@ public class BusinessParser implements ParserBase {
 
     Pattern moviePattern = Pattern.compile("MV: (.*?)\\(([\\d{4}]*)(?:\\/)?[\\w]*?\\)");
     Pattern moneyPattern = Pattern.compile("GR: (\\w+)\\s(.*?)\\s(?:\\((.*?)\\))?.*");
-    Pattern divisionPatter = Pattern.compile("(?:--)+");
+    Pattern divisionPatter = Pattern.compile("-{2,}");
 
     String movieName = "";
     String movieYear = "";
@@ -37,8 +37,8 @@ public class BusinessParser implements ParserBase {
                     isSerie = true;
                     name = name.replace("\"", "");
                 }
-                movieName = name;
-                movieYear = m.group(2);
+                movieName = name.trim();
+                movieYear = m.group(2).trim();
             }
         }
         else if(moneyPattern.matcher(line).matches())
@@ -52,7 +52,7 @@ public class BusinessParser implements ParserBase {
             if(!movieName.isEmpty() && !movieYear.isEmpty())
             {
                 if(m.find())
-                    return String.format("%s\t%s\t%s\t%s\t%s\t%s", movieName, movieYear, isSerie, m.group(1), m.group(2).replace(",", ""), m.group(3));
+                    return String.format("%s\t%s\t%s\t%s\t%s\t%s", movieName, movieYear, isSerie, m.group(1).trim(), m.group(2).replace(",", "").trim(), m.group(3).trim());
             }
         }
         return "";
