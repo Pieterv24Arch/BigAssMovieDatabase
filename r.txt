@@ -1,0 +1,10 @@
+library(RPostgreSQL)
+
+drv <- dbDriver("PostgreSQL")
+con <- dbConnect(drv, 
+	dbname="postgres",host="141.252.214.43", 
+	port=5432,user="user",password="123456789")
+
+data = dbGetQuery(con, "SELECT bigmovie.videogenre.genretype, bigmovie.videoland.landnaam, bigmovie.videoland.videomateriaalnaam, bigmovie.videoland.isserie FROM bigmovie.videoland INNER JOIN bigmovie.videogenre ON bigmovie.videoland.videomateriaalnaam=bigmovie.videogenre.videomateriaalnaam AND bigmovie.videoland.isserie=bigmovie.videogenre.isserie AND bigmovie.videoland.videomateriaaljaar=bigmovie.videogenre.videomateriaaljaar WHERE bigmovie.videoland.landnaam='USA' OR bigmovie.videoland.landnaam='France'")
+
+dbDisconnect(con)

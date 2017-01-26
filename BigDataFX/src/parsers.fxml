@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="400.0" prefWidth="640.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ParserController">
+  <children>
+      <Label text="Parsers">
+         <font>
+            <Font name="Roboto" size="48.0" />
+         </font>
+      </Label>
+      <Label text="Parse different data files trough the controls below" />
+      <Separator layoutX="35.0" layoutY="208.0" prefWidth="200.0">
+         <VBox.margin>
+            <Insets bottom="10.0" top="10.0" />
+         </VBox.margin>
+      </Separator>
+      <HBox>
+         <children>
+            <JFXButton alignment="TOP_LEFT" minWidth="200.0" onAction="#OpenFileChooserInputFile" styleClass="button-raised" text="Select input file">
+               <padding>
+                  <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
+               </padding>
+            </JFXButton>
+            <JFXTextField fx:id="inputFileLocation" promptText="//input/file" HBox.hgrow="ALWAYS" />
+         </children>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets bottom="5.0" />
+         </padding>
+      </HBox>
+      <HBox layoutX="35.0" layoutY="119.0">
+         <children>
+            <JFXButton alignment="TOP_LEFT" minWidth="200.0" onAction="#OpenFileChooserOutputLocation" styleClass="button-raised" text="Select output file">
+               <padding>
+                  <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
+               </padding>
+            </JFXButton>
+            <JFXTextField fx:id="outputFileLocation" promptText="//output/file" HBox.hgrow="ALWAYS" />
+         </children>
+      </HBox>
+      <Separator prefWidth="200.0">
+         <VBox.margin>
+            <Insets bottom="10.0" top="10.0" />
+         </VBox.margin>
+      </Separator>
+      <HBox>
+         <children>
+            <JFXComboBox fx:id="fileTypeSelector" minWidth="350.0" promptText="Type of data">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </JFXComboBox>
+            <JFXButton fx:id="parsingButton" alignment="TOP_LEFT" minWidth="200.0" onAction="#StartParsing" styleClass="button-raised" text="Start Parsing">
+               <padding>
+                  <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
+               </padding>
+            </JFXButton>
+         </children>
+      </HBox>
+      <JFXTextArea fx:id="outputLog" editable="false" maxHeight="1.7976931348623157E308" style="-fx-background-color: transparent;">
+         <VBox.margin>
+            <Insets bottom="10.0" top="10.0" />
+         </VBox.margin>
+      </JFXTextArea>
+  </children>
+   <padding>
+      <Insets bottom="10.0" left="25.0" right="25.0" top="10.0" />
+   </padding>
+</VBox>
