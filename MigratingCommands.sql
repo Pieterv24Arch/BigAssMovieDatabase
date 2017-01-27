@@ -104,8 +104,8 @@ INSERT INTO bigmovie.videoschrijver (schrijvernaam, videomateriaalnaam, videomat
       WHERE (stage.name, stage.lastname) IN (SELECT schrijver.naam, schrijver.achternaam  FROM bigmovie.schrijver)
 
 --Add references between movies/series and actors
-INSERT INTO bigmovie.rol (acteurnaam, videomateriaalnaam, videomateriaaljaar, isserie, rolnaam, priroriteit)
-    SELECT DISTINCT stage.name, stage.moviename, stage.releaseyear, stage.isserie, stage.role, stage.payroll FROM "bigmovieStaging".actors AS stage
+INSERT INTO bigmovie.rol (acteurnaam, videomateriaalnaam, videomateriaaljaar, isserie, rolnaam, priroriteit, isman)
+    SELECT DISTINCT stage.name, stage.moviename, stage.releaseyear, stage.isserie, stage.role, stage.payroll, stage.ismale FROM "bigmovieStaging".actors AS stage
       INNER JOIN bigmovie.videomateriaal AS ref
       ON stage.moviename = ref.naam AND stage.releaseyear = ref.jaar AND stage.isserie = ref.isserie
       WHERE (stage.name) IN (SELECT acteur.naam FROM bigmovie.acteur);
