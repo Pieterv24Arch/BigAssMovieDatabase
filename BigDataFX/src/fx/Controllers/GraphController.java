@@ -15,8 +15,7 @@ import org.postgresql.Driver;
 import javax.swing.text.html.StyleSheet;
 import java.net.URL;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class GraphController extends Controller implements Initializable {
 
@@ -49,11 +48,11 @@ public class GraphController extends Controller implements Initializable {
         try {
             DatabaseConnection.StartConnection();
             Statement stmt = DatabaseConnection.GetConnection().createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT naam FROM bigmovie.land ORDER BY naam ASC");
+            ResultSet rs = stmt.executeQuery("SELECT naam, fullname FROM bigmovie.land WHERE fullname IS NOT NULL ORDER BY fullname ASC");
             countries = new ArrayList<String>();
             while (rs.next())
             {
-                countries.add(rs.getString("naam"));
+                countries.add(rs.getString("fullname"));
             }
         }
         catch (SQLException ex)
@@ -69,7 +68,8 @@ public class GraphController extends Controller implements Initializable {
     private void graphButtonClicked()
     {
         try {
-            createPlot(countrySelector.getSelectionModel().getSelectedItem().getText());
+            String country = getCountryCode(countrySelector.getSelectionModel().getSelectedItem().getText());
+            createPlot(country, countrySelector.getSelectionModel().getSelectedItem().getText());
         }
         catch (Exception ex)
         {
@@ -77,7 +77,7 @@ public class GraphController extends Controller implements Initializable {
         }
     }
 
-    private void createPlot(String country) throws SQLException
+    private void createPlot(String country, String fullName) throws SQLException
     {
         try{
             DatabaseConnection.StartConnection();
@@ -90,7 +90,7 @@ public class GraphController extends Controller implements Initializable {
             Statement statement = DatabaseConnection.GetConnection().createStatement();
             ResultSet rs = statement.executeQuery(sql);
             XYChart.Series serie = new XYChart.Series();
-            serie.setName(country);
+            serie.setName(fullName);
             while (rs.next())
             {
                 int aantal = Integer.parseInt(rs.getString("counted"));
@@ -107,5 +107,19 @@ public class GraphController extends Controller implements Initializable {
         finally {
             DatabaseConnection.StopConnection();
         }
+    }
+
+    private String getCountryCode(String fullname) throws SQLException
+    {
+        try {
+            DatabaseConnection.StartConnection();
+            Statement stmt = DatabaseConnection.GetConnection().createStatement();
+            String sql = "SELECT land.naam FROM bigmovie.land WHERE fullname = '" + fullname + "'";
+            ResultSet rs = stmt.executeQuery(sql);
+            rs.next();
+            return rs.getString("naam");
+        }
+        catch (Exception ex){System.out.println("Something went wrong\n"+ex);}
+        return "";
     }
 }
