@@ -27,7 +27,7 @@ public class Main extends Application {
                         loadMainPane()
                 )
         );
-        stage.show();
+        stage.show();;
     }
 
     /**

@@ -17,7 +17,7 @@
                </font>
             </Label>
             <Label text="Below you will see the birtplaces of all registered actors and actresses" />
-            <WebView fx:id="mapView" contextMenuEnabled="true" prefHeight="-1.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+            <WebView fx:id="mapView" contextMenuEnabled="false" prefHeight="-1.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                <VBox.margin>
                   <Insets bottom="-25.0" left="-25.0" right="-25.0" top="15.0" />
                </VBox.margin>

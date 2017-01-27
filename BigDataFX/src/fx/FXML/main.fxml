@@ -27,16 +27,16 @@
             </Separator>
             <JFXButton alignment="CENTER" layoutX="10.0" layoutY="250.0" maxWidth="1.7976931348623157E308" onAction="#NavigateToResultSet" text="Simple Data" textAlignment="CENTER" />
             <JFXButton alignment="CENTER" layoutX="10.0" layoutY="283.0" maxWidth="1.7976931348623157E308" onAction="#NavigateToMapView" text="Map Viewer" textAlignment="CENTER" />
-            <JFXButton alignment="CENTER" layoutX="10.0" layoutY="303.0" maxWidth="1.7976931348623157E308" onAction="#NavigateToResultSet" text="Graph Visualizer" textAlignment="CENTER" />
+            <JFXButton alignment="CENTER" layoutX="10.0" layoutY="303.0" maxWidth="1.7976931348623157E308" onAction="#NavigateToGraphVisualizer" text="Graph Visualizer" textAlignment="CENTER" />
          </children>
       </VBox>
-      <HBox alignment="CENTER_RIGHT" prefHeight="40.0" spacing="10.0" style="-fx-background-color: rgb(245, 245, 245);" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <HBox fx:id="topBar" alignment="CENTER_RIGHT" prefHeight="40.0" spacing="10.0" style="-fx-background-color: rgb(245, 245, 245);" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <JFXButton text="_" textAlignment="CENTER">
+            <JFXButton onAction="#minimizeButtonClicked" text="_" textAlignment="CENTER">
                <font>
                   <Font name="Roboto Black" size="13.0" />
                </font></JFXButton>
-            <JFXButton layoutX="839.0" layoutY="18.0" text="X" textAlignment="CENTER">
+            <JFXButton layoutX="839.0" layoutY="18.0" onAction="#closeButtonClicked" text="X" textAlignment="CENTER">
                <font>
                   <Font name="Roboto Black" size="13.0" />
                </font>

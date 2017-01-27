@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane fitToHeight="true" fitToWidth="true" focusTraversable="false" style="-fx-background-color: transparent;" stylesheets="@style.css" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.Controllers.GraphController">
+    <content>
+        <VBox prefHeight="400.0" prefWidth="640.0" style="-fx-background-color: white;" stylesheets="@style.css">
+            <children>
+                <Label text="Graph Visualizer">
+                    <font>
+                        <Font name="Roboto" size="48.0" />
+                    </font>
+                </Label>
+                <Label text="Graph of distribution of genres per country." />
+            <Separator prefWidth="200.0">
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin>
+            </Separator>
+            <HBox>
+               <children>
+                  <JFXComboBox fx:id="countrySelector" minWidth="200.0" promptText="Select Country" />
+                  <JFXButton fx:id="graphButton" minWidth="150.0" onAction="#graphButtonClicked" styleClass="button-raised" text="Plot Graph">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </JFXButton>
+               </children>
+            </HBox>
+            <BarChart fx:id="barChart" maxHeight="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+              <xAxis>
+                <CategoryAxis side="BOTTOM" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis side="LEFT" />
+              </yAxis>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </BarChart>
+            </children>
+            <padding>
+                <Insets bottom="25.0" left="25.0" right="25.0" top="10.0" />
+            </padding>
+        </VBox>
+    </content>
+</ScrollPane>

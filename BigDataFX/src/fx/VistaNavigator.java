@@ -21,6 +21,7 @@ public class VistaNavigator {
     public static final String PARSERS = "FXML/parsers.fxml";
     public static final String RESULTSET = "FXML/resultset.fxml";
     public static final String MAPVIEW = "FXML/mapviewer.fxml";
+    public static final String GRAPHVIS = "FXML/graph.fxml";
 
     /** The main application layout controller. */
     private static MainController mainController;
