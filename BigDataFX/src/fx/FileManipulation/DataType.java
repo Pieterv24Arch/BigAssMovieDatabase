@@ -17,7 +17,9 @@ public enum DataType {
     RATINGS,
     ACTRESSES,
     DIRECTORS,
-    BIOGRAPHY;
+    BIOGRAPHY,
+    PRODUCTION,
+    BUSINESS;
 
     MovieParser movieParser = new MovieParser();
     WriterParser writerParser = new WriterParser();
@@ -30,6 +32,8 @@ public enum DataType {
     RuntimeParser runtimeParser = new RuntimeParser();
     BiographyParser biographyParser = new BiographyParser();
     DirectorParser directorParser = new DirectorParser();
+    ProductionParser productionParser = new ProductionParser();
+    BusinessParser businessParser = new BusinessParser();
 
     /**
      * returns preinstantiated of the parser for this type
@@ -61,6 +65,10 @@ public enum DataType {
                 return biographyParser;
             case DIRECTORS:
                 return directorParser;
+            case PRODUCTION:
+                return productionParser;
+            case BUSINESS:
+                return businessParser;
             default:
                 return null;
         }

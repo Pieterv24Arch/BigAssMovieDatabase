@@ -11,7 +11,7 @@ public class MPAAParser implements ParserBase
 {
     Pattern moviePattern = Pattern.compile("MV: (.*?)(?: \\()(\\d{4})(?:\\/)?[\\w]*?\\).*");
     Pattern ratingPattern = Pattern.compile("RE: Rated (PG-13|R|PG|R|NC-17).*");
-    Pattern splitPattern = Pattern.compile("(--)+");
+    Pattern splitPattern = Pattern.compile("-{2,}");
     String movieName = "";
     String movieYear = "";
 

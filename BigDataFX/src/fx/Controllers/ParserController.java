@@ -47,6 +47,8 @@ public class ParserController extends Controller implements Initializable, Loade
         fileTypeSelector.getItems().add(new Label("Genres"));
         fileTypeSelector.getItems().add(new Label("Biographies"));
         fileTypeSelector.getItems().add(new Label("Directors"));
+        fileTypeSelector.getItems().add(new Label("Production-Companies"));
+        fileTypeSelector.getItems().add(new Label("Business"));
     }
 
     @FXML
@@ -102,6 +104,8 @@ public class ParserController extends Controller implements Initializable, Loade
             case 8: return DataType.GERNES;
             case 9: return DataType.BIOGRAPHY;
             case 10: return DataType.DIRECTORS;
+            case 11: return DataType.PRODUCTION;
+            case 12: return DataType.BUSINESS;
         }
         return null;
     }

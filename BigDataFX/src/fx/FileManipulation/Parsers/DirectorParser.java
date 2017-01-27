@@ -1,7 +1,8 @@
 package fx.FileManipulation.Parsers;
 
-import java.util.regex.Matcher;
+
 import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 /**
  * Parser for the director list

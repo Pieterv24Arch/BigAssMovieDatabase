@@ -16,7 +16,7 @@ public class DatabaseConnection {
         Driver myDriver = new Driver();
         DriverManager.registerDriver(myDriver);
 
-        String Url = "jdbc:postgresql://94.212.160.40:5432/postgres?currentSchema=bigmovie";
+        String Url = "jdbc:postgresql://141.252.214.46:5432/postgres?currentSchema=bigmovie";
         String USER = "user";
         String Password = "123456789";
         conn = DriverManager.getConnection(Url, USER, Password);
