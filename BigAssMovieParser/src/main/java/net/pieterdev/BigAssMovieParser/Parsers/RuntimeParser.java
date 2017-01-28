@@ -3,6 +3,9 @@ package net.pieterdev.BigAssMovieParser.Parsers;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * @author Lex
+ */
 public class RuntimeParser implements ParserBase{
     public String parseString(String line)
     {

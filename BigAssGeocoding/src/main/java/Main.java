@@ -2,8 +2,15 @@ import java.sql.*;
 import java.math.*;
 import org.postgresql.Driver;
 
+/**
+ * Application to take locations in the database, geocode them and return the coordinates of the location to the database
+ * @author Pieter
+ */
 public class Main {
     public static void main(String[] args){
+        /**
+         * Initialize database connection and run the geocoding class
+         */
         try {
             Driver myDriver = new Driver();
             DriverManager.registerDriver(myDriver);

@@ -14,7 +14,14 @@ public class BusinessParser implements ParserBase {
     String movieYear = "";
     Boolean isSerie = false;
 
-
+    /**
+     * movieName, movieYear and isSerie are a buffer.
+     * The buffer is emptied everytime a sequence of --- is found.
+     * If movie name/year is found buffer is filled.
+     * If MovieGross is found it will be appended with the buffer and returned.
+     * @param line line to parse
+     * @return parsed string if complete dataset is found otherwise and empty string will be returned.
+     */
     @Override
     public String parseString(String line) {
         if(divisionPatter.matcher(line).matches())

@@ -3,9 +3,18 @@ package net.pieterdev.BigAssMovieParser.Parsers;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Parser for production-companies.list
+ * @author Pieter
+ */
 public class ProductionParser implements ParserBase {
     Pattern productionPattern = getPattern();
 
+    /**
+     * parses movie and productioncompany and filters out the location of the productioncompany
+     * @param line input line.
+     * @return returns parsed string if line conforms with regex otherwise return empty string
+     */
     @Override
     public String parseString(String line) {
         {

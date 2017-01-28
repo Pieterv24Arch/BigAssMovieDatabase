@@ -7,10 +7,14 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+/**
+ * Commandline interface for the application
+ * @author rainslayerx
+ */
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
+        //print options
         System.out.println("What kind of file do you want to convert");
         System.out.println("(0) Movies and Series");
         System.out.println("(1) Actors");
@@ -41,12 +45,14 @@ public class Main {
 
             System.out.println("Busy...");
 
+            //Pass input, output and type to baseloader.
             new BaseLoader(fileLocation, targetLocation, type);
         }
         else
             System.out.println("Incorrect Input, Exiting!");
     }
 
+    //Return correct datatype
     private static DataType GetDataType(String type)
     {
         switch (type) {

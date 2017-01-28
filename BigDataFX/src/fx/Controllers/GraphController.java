@@ -17,6 +17,9 @@ import java.net.URL;
 import java.sql.*;
 import java.util.*;
 
+/**
+ * @author Pieter/Lex/Richard
+ */
 public class GraphController extends Controller implements Initializable {
 
     @FXML
@@ -44,6 +47,10 @@ public class GraphController extends Controller implements Initializable {
         }
     }
 
+    /**
+     * Create a list of countries for the combobox to display
+     * @throws SQLException
+     */
     private void InitCountries() throws SQLException{
         try {
             DatabaseConnection.StartConnection();
@@ -64,6 +71,9 @@ public class GraphController extends Controller implements Initializable {
         }
     }
 
+    /**
+     * plot graph when button is clicked
+     */
     @FXML
     private void graphButtonClicked()
     {
@@ -77,6 +87,12 @@ public class GraphController extends Controller implements Initializable {
         }
     }
 
+    /**
+     * Generates graph and pushes it to the interface
+     * @param country input from combobox
+     * @param fullName full name of country for display purposes
+     * @throws SQLException
+     */
     private void createPlot(String country, String fullName) throws SQLException
     {
         try{
@@ -109,6 +125,12 @@ public class GraphController extends Controller implements Initializable {
         }
     }
 
+    /**
+     * Get countrycode from database for querry purposes
+     * @param fullname Full name of country
+     * @return return shortened version of country
+     * @throws SQLException
+     */
     private String getCountryCode(String fullname) throws SQLException
     {
         try {

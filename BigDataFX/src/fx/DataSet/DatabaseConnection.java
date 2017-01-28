@@ -7,6 +7,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
+ * Class for handeling database connections
  * Created by rainslayerx on 1/26/17.
  */
 public class DatabaseConnection {
