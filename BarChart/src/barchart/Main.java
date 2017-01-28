@@ -16,10 +16,15 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.stage.Stage;
- 
+
+/**
+ * program for plotting graphs on basis of genres per country
+ * @author Lex
+ */
 public class Main extends Application {
     @Override public void start(Stage stage) {
-        
+
+        //Create graph
         String land = "us";
         stage.setTitle("Bar Chart Sample");
         final NumberAxis yAxis = new NumberAxis();
@@ -32,8 +37,10 @@ public class Main extends Application {
         yAxis.setLabel("Aantal");
         XYChart.Series serie = new XYChart.Series();
         serie.setName(land);
-        
-    
+
+        /**
+         * Initialize database connection
+         */
         try{
            Driver myDriver = new Driver();
             DriverManager.registerDriver(myDriver);
@@ -58,7 +65,8 @@ public class Main extends Application {
             System.out.println("Something went wrong. Continuing\n"+ex);
         }
         Scene scene  = new Scene(bc,800,600);
-        
+
+        //Push data to graph in interface
         bc.getData().addAll(serie);
         stage.setScene(scene);
         stage.show();

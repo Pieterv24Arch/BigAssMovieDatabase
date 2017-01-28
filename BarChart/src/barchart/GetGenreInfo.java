@@ -18,7 +18,7 @@ import javafx.stage.Stage;
  */
 
 /**
- *
+ * Gets genre counts per country
  * @author lexpunter
  */
 
